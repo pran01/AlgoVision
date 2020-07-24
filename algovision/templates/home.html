@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+<div class="full-height" style="background: #379683;">
+<nav class="navbar navbar-light" style="background: #5cdb95; height: 5em;">
+    <a class="navbar-brand">
+        <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
+        <span class="hide">Algo-Vision</span>
+    </a>
+    <form class="form-inline">
+      <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
+      <button class="btn btn-success my-2 my-sm-0" type="submit" style="background: #379683;">Search</button>
+    </form>
+</nav>
+<h1 class="text-center" style="margin-top: 10%;">Type of Algorithm</h1>
+<div class="container" style="border: 1px black solid; border-radius: 10px; margin-top: 2em; padding: 2em;">
+    <a type="button" class=" btn btn-outline-primary" href="{{url_for('searching')}}" style="color: black;">Searching</a>
+</div>
+
+</div>
+{% endblock %}
