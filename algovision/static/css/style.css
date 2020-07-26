@@ -1,7 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 html,body{
     height: 100%;
-    margin: 0px;
-    padding: 0px;
 }
 
 .full-height{
@@ -16,4 +18,90 @@ html,body{
 
 a{
     text-decoration: none;
+}
+
+.searching{
+    border: 1px black dashed;
+    width: 50em;
+    height: 25em;
+    margin-top: 1em;
+    padding: 0;
+    padding-left: 0.5em;
+    margin-left: 15em;
+}
+
+.searching-algos{
+    border: 1px black solid;
+    margin-top: 1em;
+    border-radius: 35%;
+    width: 50em;
+    height: 2em;
+}
+
+.form-check{
+    margin: 0em 2em;
+}
+
+.search-parameters{
+    border: 2px black solid;
+    float: left;
+    height: 20em;
+    width: 14em;
+    margin: 0;
+    margin-top: 2em;
+    border-top-right-radius: 15%;
+    border-bottom-right-radius: 15%;
+    padding: 1em;
+}
+
+.colors{
+    border: 2px black solid;
+    float: right;
+    height: 20em;
+    width: 14em;
+    margin: 0;
+    margin-top: 2em;
+    border-top-left-radius: 15%;
+    border-bottom-left-radius: 15%;
+    padding: 0.5em;
+}
+
+.color-item{
+    border: 1px black dashed;
+    height: 5em;
+    width: 10em;
+    margin:0;
+    margin-left: 2em;
+    margin-top: 0.5em;
+    padding: 0.1em;
+}
+
+.color-item-label{
+    font-size: 0.8em;
+}
+
+#chosendiv{
+    border: 1px black solid;
+    margin: 0;
+    width: 30em;
+    float: left;
+    margin-top: 1em;
+    margin-left: 2em;
+    height: 2em;
+    background: white;
+}
+
+#searchbtn{
+    float: left;
+    margin-left: 17em;
+    margin-top: 0.3em;
+}
+
+.code{
+    border:1px solid;
+    width:500px;
+    height:200px;
+    overflow:auto;
+    outline:none;
+    resize:none;
 }
