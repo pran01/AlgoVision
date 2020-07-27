@@ -9,3 +9,8 @@ def home():
 @app.route('/searching',methods=['GET','POST'])
 def searching():
     return render_template('searching.html')
+
+
+@app.route('/sorting',methods=['GET','POST'])
+def sorting():
+    return render_template('sorting.html')
