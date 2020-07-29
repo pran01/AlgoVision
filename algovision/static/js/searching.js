@@ -1,20 +1,20 @@
-let searching=document.querySelector(".searching");
+let bars=document.querySelector(".bars");
 let searchbtn=document.querySelector("#searchbtn");
 let search=document.querySelector("#search");
 let chosen=document.querySelector("#chosen");
 
 for (var a=[],i=0;i<40;++i) a[i]=i;
 
-// http://stackoverflow.com/questions/962802#962890
+//http://stackoverflow.com/questions/962802#962890
 function shuffle(array) {
-  var tmp, current, top = array.length;
-  if(top) while(--top) {
+    var tmp, current, top = array.length;
+    if(top) while(--top) {
     current = Math.floor(Math.random() * (top + 1));
     tmp = array[current];
     array[current] = array[top];
     array[top] = tmp;
-  }
-  return array;
+    }
+    return array;
 }
 
 function heightwise(num){
@@ -54,7 +54,7 @@ for (let i=0;i<a.length;i++){
     bar.style=`height: ${a[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left;`;
     bar.classList.add(`bar${i}`);
     bar.innerHTML=`<span style="font-size:0.8em;">${(a[i]/100)*40}</span>`;
-    searching.appendChild(bar);
+    bars.appendChild(bar);
 }
 
 searchbtn.addEventListener("click",()=>StartSearching(),false);
@@ -92,13 +92,13 @@ function StartSearching(){
 }
 
 async function sequentialSearch(x){
-    searching.innerHTML=" ";
+    bars.innerHTML=" ";
     for (let i=0;i<a.length;i++){
         let bar=document.createElement("div");
         bar.style=`height: ${a[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
         bar.innerHTML=`<span style="font-size:0.8em;">${(a[i]/100)*40}</span>`;
-        searching.appendChild(bar);
+        bars.appendChild(bar);
     }
     await sleep(500);
     chosen.style.color="black";
@@ -122,13 +122,13 @@ async function sequentialSearch(x){
 }
 
 async function binarySearch(x){
-    searching.innerHTML=" ";
+    bars.innerHTML=" ";
     for (let i=0;i<sorted.length;i++){
         let bar=document.createElement("div");
         bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
         bar.innerHTML=`<span style="font-size:0.8em;">${(sorted[i]/100)*40}</span>`;
-        searching.appendChild(bar);
+        bars.appendChild(bar);
     }
     chosen.style.color="black";
     chosen.innerHTML=`Searching for ${x} with Binary Search...`;
@@ -167,13 +167,13 @@ async function binarySearch(x){
 }
 
 async function interPolationSearch(x){
-    searching.innerHTML=" ";
+    bars.innerHTML=" ";
     for (let i=0;i<sorted.length;i++){
         let bar=document.createElement("div");
         bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
         bar.innerHTML=`<span style="font-size:0.8em;">${(sorted[i]/100)*40}</span>`;
-        searching.appendChild(bar);
+        bars.appendChild(bar);
     }
     chosen.style.color="black";
     chosen.innerHTML=`Searching for ${x} with Interpolation Search...`;

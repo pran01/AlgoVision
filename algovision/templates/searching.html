@@ -6,13 +6,13 @@
 {% block body %}
 <div class="full-height" style="background: #379683;">
     <nav class="navbar navbar-light" style="background: #5cdb95; height: 5em;">
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="{{url_for('home')}}">
             <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
             <span class="hide">Algo-Vision</span>
         </a>
         <form class="form-inline">
-          <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
-          <button class="btn btn-success my-2 my-sm-0" type="submit" style="background: #379683;">Search</button>
+            <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit" style="background: #379683;">Search</button>
         </form>
     </nav>
     <div class="container searching-algos text-center">
@@ -49,7 +49,7 @@
         <div class="color-item text-center" style="background: #d80702; height: 2em;"><span class="color-item-label">Wrong one</span></div>
         <div class="color-item text-center" style="background: #05386b; height: 2em; color: white;"><span class="color-item-label text-center">Found</span></div>
     </div>
-    <div class="container searching text-center">
+    <div class="container bars text-center">
 
     </div>
     <div class="text-center" id="search">
@@ -208,4 +208,5 @@ function interpolationSearch(arr,x){
     </div>
 </div>
 
+<script src="{{url_for('static',filename='js/searching.js')}}"></script>
 {% endblock %}

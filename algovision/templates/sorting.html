@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block head %}
+<title>Sorting</title>
+{% endblock %}
+
+{% block body %}
+<div class="full-height" style="background: #379683;">
+    <nav class="navbar navbar-light" style="background: #5cdb95; height: 5em;">
+        <a class="navbar-brand" href="{{url_for('home')}}">
+            <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
+            <span class="hide">Algo-Vision</span>
+        </a>
+        <form class="form-inline">
+            <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit" style="background: #379683;">Search</button>
+        </form>
+    </nav>
+    <div class="container sorting-algos text-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo1" value="Insertion">
+            <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal" data-target="">Insertion</a></u></label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo2" value="Selection">
+            <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target="">Selection</a></u></label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo3" value="Bubble">
+            <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target="">Bubble</a></u></label>
+        </div>
+    </div>
+    <!-- <div class="container search-parameters">
+        <form>
+            <div class="form-group">
+                <label class="text-center" for="ToSearch" id="ToSearchLabel">
+                    <b>Enter a number to search.(Optional)</b><br>
+                    <span id="ToSearchRange">(The number should be in the range: [1,39] )</span><br>
+                    <span style="font-size: 0.8em;">*If a number is not provided, 
+                        we will select a random number from the range</span>
+                </label>
+                <input type="text" class="form-control text-center" id="ToSearch" placeholder="Enter here">
+            </div>
+        </form>
+    </div> -->
+    <div class="container colors text-center">
+        <h4>Colors</h4><br>
+        <div class="color-item text-center" style="background: #f7e800;"><span class="color-item-label">Upper/lower range for Binary and InterpolationSearch.</span></div>
+        <div class="color-item text-center" style="background: #f866ae; height: 2em;"><span class="color-item-label">Checking</span></div>
+        <div class="color-item text-center" style="background: #d80702; height: 2em;"><span class="color-item-label">Wrong one</span></div>
+        <div class="color-item text-center" style="background: #05386b; height: 2em; color: white;"><span class="color-item-label text-center">Found</span></div>
+    </div>
+    <div class="container bars text-center">
+
+    </div>
+    <div class="text-center" id="sort">
+    <button class="btn btn-info btn-lg" id="sortbtn">Sort</button>
+    <div id="chosendiv">
+        <span id="chosen"></span>
+    </div>
+    </div>
+</div>
+
+<script src="{{url_for('static',filename='js/sorting.js')}}"></script>
+{% endblock %}

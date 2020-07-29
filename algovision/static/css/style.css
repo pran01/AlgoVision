@@ -20,7 +20,7 @@ a{
     text-decoration: none;
 }
 
-.searching{
+.bars{
     border: 1px black dashed;
     width: 50em;
     height: 25em;
@@ -104,4 +104,18 @@ a{
     overflow:auto;
     outline:none;
     resize:none;
+}
+
+.sorting-algos{
+    border: 1px black solid;
+    margin-top: 1em;
+    border-radius: 35%;
+    width: 50em;
+    height: 2em;
+}
+
+#sortbtn{
+    float: left;
+    margin-left: 17em;
+    margin-top: 0.3em;
 }
