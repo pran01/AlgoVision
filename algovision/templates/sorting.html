@@ -29,19 +29,17 @@
             <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target="">Bubble</a></u></label>
         </div>
     </div>
-    <!-- <div class="container search-parameters">
+    <div class="container text-center search-parameters">
         <form>
             <div class="form-group">
-                <label class="text-center" for="ToSearch" id="ToSearchLabel">
-                    <b>Enter a number to search.(Optional)</b><br>
-                    <span id="ToSearchRange">(The number should be in the range: [1,39] )</span><br>
-                    <span style="font-size: 0.8em;">*If a number is not provided, 
-                        we will select a random number from the range</span>
+                <label class="text-center" for="sortSpeed" id="sortSpeedLabel">
+                    <b>Sorting Speed</b><br>
+                    <span>(Kindly reset the array before setting the speed.)</span><br>
                 </label>
-                <input type="text" class="form-control text-center" id="ToSearch" placeholder="Enter here">
+                <input type="range" min="50" max="300" value="200" class="slider" id="sortSpeed">
             </div>
         </form>
-    </div> -->
+    </div>
     <div class="container colors text-center">
         <h4>Colors</h4><br>
         <div class="color-item text-center" style="background: #f7e800;"><span class="color-item-label">Upper/lower range for Binary and InterpolationSearch.</span></div>
@@ -57,6 +55,7 @@
     <div id="chosendiv">
         <span id="chosen"></span>
     </div>
+    <button class="btn btn-info btn-lg" id="resetBtn">Reset Array</button>
     </div>
 </div>
 
