@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Source Code Pro', monospace;
 }
 html,body{
     height: 100%;
@@ -116,7 +117,7 @@ a{
 
 #sortbtn{
     float: left;
-    margin-left: 13em;
+    margin-left: 12em;
     margin-top: 0.3em;
 }
 
@@ -125,4 +126,13 @@ a{
     float: left;
     margin-top: 0.3em;
     margin-left: 2em;
+}
+
+.slider{
+    width: 95%;
+    height: 12px;
+}
+
+#sortSpeedLabel{
+    margin-top: 30%;
 }

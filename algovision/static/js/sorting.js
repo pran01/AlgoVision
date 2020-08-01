@@ -5,12 +5,11 @@ let chosen=document.querySelector("#chosen");
 let resetBtn=document.querySelector("#resetBtn");
 
 let slider = document.querySelector("#sortSpeed");
-let speed=300-(slider.value-50);
+let speed=300-(slider.value-10);
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
-    speed = 300-(this.value-50);
-    console.log(speed);
+    speed = 300-(this.value-10);
 }
 
 //creating an empty array off length 40
@@ -140,5 +139,41 @@ async function insertionSort(){
         j1Bar.innerHTML=`<span style="font-size:0.8em;">${key}</span>`;
         await sleep(speed+100);
         j1Bar.style.backgroundColor="#8ee4af";
+    }
+}
+
+async function selectionSort(){
+    bars.innerHTML="";
+    a_copy=[...a];
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.8em;">${(a_copy[i])}</span>`;
+        bars.appendChild(bar);
+    }
+    const n=a_copy.length;
+    for (let i=0;i<n;i++){
+        let min=i;
+        let iBar=document.querySelector(`.bar${i}`);
+        iBar.style.backgroundColor="Pink";
+        await sleep(speed);
+        for(let j=i+1;j<n;j++){
+            let jBar=document.querySelector(`.bar${j}`);
+            jBar.style.backgroundColor="Yellow";
+            await sleep(speed);
+            if (a_copy[j]<a_copy[min])
+            min=j;
+            jBar.style.backgroundColor="#8ee4af";
+        }
+        let minBar=document.querySelector(`.bar${min}`);
+        minBar.style.backgroundColor="Pink";
+        //swap the minimum value with the value at index i.
+        let tempHeight=iBar.style.height;   let temp=a_copy[i]; let tempInner=iBar.innerHTML;
+        iBar.style.height=minBar.style.height;  a_copy[i]=a_copy[min];  iBar.innerHTML=minBar.innerHTML;
+        minBar.style.height=tempHeight; a_copy[min]=temp;   minBar.innerHTML=tempInner;
+        await sleep(speed+100);
+        iBar.style.backgroundColor="#8ee4af";
+        minBar.style.backgroundColor="#8ee4af";
     }
 }
