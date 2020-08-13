@@ -83,6 +83,7 @@ a{
 
 #chosendiv{
     border: 1px black solid;
+    border-radius: 10px 10px;
     margin: 0;
     width: 30em;
     float: left;
@@ -110,7 +111,7 @@ a{
 .sorting-algos{
     border: 1px black solid;
     margin-top: 1em;
-    border-radius: 35%;
+    border-radius: 50px;
     width: 50em;
     height: 2em;
 }
