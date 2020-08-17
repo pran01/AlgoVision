@@ -5,22 +5,22 @@
 {% endblock %}
 
 {% block body %}
-<div class="full-height" style="background: #379683;">
-<nav class="navbar navbar-light" style="background: #5cdb95; height: 5em;">
+<div class="full-height" style="background: #0c0032; color:white"><!--#379683-->
+<nav class="navbar navbar-light" style="background: #17a2b8; height: 5em; color:white"><!--#5cdb95-->
     <a class="navbar-brand" href="{{url_for('home')}}">
         <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
         <span class="hide">Algo-Vision</span>
     </a>
     <form class="form-inline">
       <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
-      <button class="btn btn-success my-2 my-sm-0" type="submit" style="background: #379683;">Search</button>
+      <button class="btn btn-info my-2 my-sm-0" type="submit" style="background:#0c0032">Search</button>
     </form>
 </nav>
 <h1 class="text-center" style="margin-top: 10%;">Type of Algorithm</h1>
-<div class="container" style="border: 1px black solid; border-radius: 10px; margin-top: 2em; padding: 2em;">
-    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('searching')}}" style="color: black; margin-left: 3em;">Searching</a>
-    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('sorting')}}" style="color: black; margin-left: 3em;">Sorting</a>
-    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('searching')}}" style="color: black; margin-left: 3em;">Path Finder</a>
+<div class="container" style="border: 1px white solid; border-radius: 10px; margin-top: 2em; padding: 2em;">
+    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('searching')}}" style="color: black; margin-left: 3em;"><b>Searching</b></a>
+    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('sorting')}}" style="color: black; margin-left: 3em;"><b>Sorting</b></a>
+    <a type="button" class=" btn btn-info btn-lg col-3" href="{{url_for('searching')}}" style="color: black; margin-left: 3em;"><b>Path Finder</b></a>
 </div>
 
 </div>

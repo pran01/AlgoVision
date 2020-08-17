@@ -51,9 +51,9 @@ function randomIntFromInterval(min,max){
 
 for (let i=0;i<a.length;i++){
     let bar=document.createElement("div");
-    bar.style=`height: ${a[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left;`;
+    bar.style=`height: ${a[i]}%;width:${33/40}em;background:#17a2b8;margin:0.2em;float:left;`;
     bar.classList.add(`bar${i}`);
-    bar.innerHTML=`<span style="font-size:0.8em;">${(a[i]/100)*40}</span>`;
+    bar.innerHTML=`<span style="font-size:0.7em; color:black;"><b>${(a[i]/100)*40}</b></span>`;
     bars.appendChild(bar);
 }
 
@@ -62,7 +62,7 @@ searchbtn.addEventListener("click",()=>StartSearching(),false);
 function StartSearching(){
     let num=document.querySelector("#ToSearch");
     let num_range=document.querySelector('#ToSearchRange');
-    num_range.style.color="Black";
+    num_range.style.color="White";
     let x;
     if(num.value){
         x=num.value;
@@ -95,9 +95,9 @@ async function sequentialSearch(x){
     bars.innerHTML=" ";
     for (let i=0;i<a.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${a[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
+        bar.style=`height: ${a[i]}%;width:${33/40}em;background:#17a2b8;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(a[i]/100)*40}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em; color:black;"><b>${(a[i]/100)*40}</b></span>`;
         bars.appendChild(bar);
     }
     await sleep(500);
@@ -105,17 +105,17 @@ async function sequentialSearch(x){
     chosen.innerHTML=`Searching for ${x} with Sequential Search...`;
     for(let i=0;i<a.length;i++){
         let current_bar=document.querySelector(`.bar${i}`);
-        current_bar.style.backgroundColor="#f866ae";//pink
+        current_bar.style.backgroundColor="#f64c72";//checking-checking
         if(a[i]==(x/40)*100){
             await sleep(250);
-            current_bar.style.backgroundColor="#05386b";//blue
+            current_bar.style.backgroundColor="#5cdb95";//green-found
             break;
         }
         else{
             await sleep(250);
-            current_bar.style.backgroundColor="#d80702";//red
-            await sleep(250);
-            current_bar.style.backgroundColor="#8ee4af";//original
+            current_bar.style.backgroundColor="#d80702";//Wrong one
+            await sleep(450);
+            current_bar.style.backgroundColor="#17a2b8";//original
             continue;
         }
     }
@@ -125,9 +125,9 @@ async function binarySearch(x){
     bars.innerHTML=" ";
     for (let i=0;i<sorted.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
+        bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#17a2b8;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(sorted[i]/100)*40}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em; color:black;"><b>${(sorted[i]/100)*40}</b></span>`;
         bars.appendChild(bar);
     }
     chosen.style.color="black";
@@ -136,33 +136,33 @@ async function binarySearch(x){
     while (start<=end){ 
         let start_bar=document.querySelector(`.bar${start}`);
         let end_bar=document.querySelector(`.bar${end}`);
-        start_bar.style.backgroundColor="#f7e800";//yellow
-        end_bar.style.backgroundColor="#f7e800";//yellow
+        start_bar.style.backgroundColor="#3500d3";//range
+        end_bar.style.backgroundColor="#3500d3";//range
         await sleep(1000);
         let mid=Math.floor((start + end)/2);
         let mid_bar=document.querySelector(`.bar${mid}`);
-        mid_bar.style.backgroundColor="#f866ae";//pink
+        mid_bar.style.backgroundColor="#f64c72";//checking
         await sleep(250);
         if (sorted[mid]==(x/40)*100){
-            mid_bar.style.backgroundColor="#05386b";//blue
-            if(start!=mid){start_bar.style.backgroundColor="#8ee4af";}//original
-            if(end!=mid){end_bar.style.backgroundColor="#8ee4af";}//original
+            mid_bar.style.backgroundColor="#5cdb95";//found
+            if(start!=mid){start_bar.style.backgroundColor="#17a2b8";}//original
+            if(end!=mid){end_bar.style.backgroundColor="#17a2b8";}//original
             break;
         } 
         else if (sorted[mid] < (x/40)*100){
             mid_bar.style.backgroundColor="#d80702"//red;
             start = mid + 1;
             await sleep(250);
-            mid_bar.style.backgroundColor="#8ee4af"//original;
+            mid_bar.style.backgroundColor="#17a2b8"//original;
         }
         else{
             mid_bar.style.backgroundColor="#d80702"//red;
             end = mid - 1;
             await sleep(250);
-            mid_bar.style.backgroundColor="#8ee4af"//original;
+            mid_bar.style.backgroundColor="#17a2b8"//original;
         }
-        start_bar.style.backgroundColor="#8ee4af"//original;
-        end_bar.style.backgroundColor="#8ee4af"//original;
+        start_bar.style.backgroundColor="#17a2b8"//original;
+        end_bar.style.backgroundColor="#17a2b8"//original;
     }
 }
 
@@ -170,9 +170,9 @@ async function interPolationSearch(x){
     bars.innerHTML=" ";
     for (let i=0;i<sorted.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#8ee4af;margin:0.2em;float:left`;
+        bar.style=`height: ${sorted[i]}%;width:${33/40}em;background:#17a2b8;margin:0.2em;float:left`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(sorted[i]/100)*40}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em; color:black;"><b>${(sorted[i]/100)*40}</b></span>`;
         bars.appendChild(bar);
     }
     chosen.style.color="black";
@@ -181,48 +181,48 @@ async function interPolationSearch(x){
     while ((lo<=hi)&&((x/40)*100>=sorted[lo])&&((x/40)*100<=sorted[hi])){
         let lo_bar=document.querySelector(`.bar${lo}`);
         let high_bar=document.querySelector(`.bar${hi}`);
-        lo_bar.style.backgroundColor="#f7e800";//yellow
-        high_bar.style.backgroundColor="#f7e800";//yellow
+        lo_bar.style.backgroundColor="#3500d3";//range
+        high_bar.style.backgroundColor="#3500d3";//range
         await sleep(500);
         if(lo==hi){
-            lo_bar.style.backgroundColor="#f866ae";//pink
+            lo_bar.style.backgroundColor="#f64c72";//checking
             await sleep(500);
             if(sorted[lo]==(x/40)*100){
-                lo_bar.style.backgroundColor="#05386b";//blue
-                high_bar.style.backgroundColor="#8ee4af";//original
+                lo_bar.style.backgroundColor="#5cdb95";//found
+                high_bar.style.backgroundColor="#17a2b8";//original
                 await sleep(500);
                 break;
             }
             else{
-                lo_bar.style.backgroundColor="#8ee4af";//original
-                high_bar.style.backgroundColor="#8ee4af";//original
+                lo_bar.style.backgroundColor="#17a2b8";//original
+                high_bar.style.backgroundColor="#17a2b8";//original
                 await sleep(500);
                 break;
             }
         }
         let pos=Math.floor(lo + (((hi-lo)/(sorted[hi]-sorted[lo]))*((x/40)*100 - sorted[lo])));
         let pos_bar=document.querySelector(`.bar${pos}`);
-        pos_bar.style.backgroundColor="#f866ae";
+        pos_bar.style.backgroundColor="#f64c72";
         await sleep(500);
         if(sorted[pos]==(x/40)*100){
-            pos_bar.style.backgroundColor="#05386b";//blue
-            lo_bar.style.backgroundColor="#8ee4af";//original
-            high_bar.style.backgroundColor="#8ee4af";//original
+            pos_bar.style.backgroundColor="#5cdb95";//found
+            lo_bar.style.backgroundColor="#17a2b8";//original
+            high_bar.style.backgroundColor="#17a2b8";//original
             await sleep(500);
             break;
         }
         else if (sorted[pos]>(x/40)*100){
-            pos_bar.style.backgroundColor="#8ee4af";//original
+            pos_bar.style.backgroundColor="#17a2b8";//original
             await sleep(500);
             hi=pos-1;
         }
         else{
-            pos_bar.style.backgroundColor="#8ee4af";//original
+            pos_bar.style.backgroundColor="#17a2b8";//original
             lo=pos+1;
             await sleep(500);
         }
-        lo_bar.style.backgroundColor="#8ee4af";//original
-        high_bar.style.backgroundColor="#8ee4af";//original
+        lo_bar.style.backgroundColor="#17a2b8";//original
+        high_bar.style.backgroundColor="#17a2b8";//original
         await sleep(500);
     }
 }
