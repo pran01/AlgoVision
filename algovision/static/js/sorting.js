@@ -57,9 +57,9 @@ a_height=a.map(heightwise);
 //adding bars to the div(#bars)
 for (let i=0;i<a_height.length;i++){
     let bar=document.createElement("div");
-    bar.style=`height: ${(a[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+    bar.style=`height: ${(a[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
     bar.classList.add(`bar${i}`);
-    bar.innerHTML=`<span style="font-size:0.8em;">${(a[i])}</span>`;
+    bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a[i])}</b></span>`;
     bars.appendChild(bar);
 }
 
@@ -70,9 +70,9 @@ function resetArray(){
     a=shuffle(a);
     for (let i=0;i<a.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${(a[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+        bar.style=`height: ${(a[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(a[i])}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a[i])}</b></span>`;
         bars.appendChild(bar);
     }
 }
@@ -93,6 +93,7 @@ function startSorting(){
     else if(Algo==null){
         chosen.style.color="#d80702";//red
         chosen.innerHTML="Please Choose an algorithm first.";
+        alert("Please Choose an algorithm first.");
     }
 }
 
@@ -101,19 +102,21 @@ async function insertionSort(){
     a_copy=[...a];
     for (let i=0;i<a_copy.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(a_copy[i])}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
         bars.appendChild(bar);
     }
     let n=a_copy.length;
     for(let i=1;i<n;i++){
+        let sortedBar=document.querySelector(`.bar${i-1}`);
+        sortedBar.style.backgroundColor="#5cdb95";//sorted
         let key=a_copy[i];
         chosen.style.color="black";
         chosen.innerHTML=`Picked ${key}!`;
         let keyBar=document.querySelector(`.bar${i}`);
         keyHeight=keyBar.style.height;
-        keyBar.style.backgroundColor="Pink";
+        keyBar.style.backgroundColor="#3500d3";//selected
         await sleep(speed);
         let j=i-1;
         while(j>=0 && a_copy[j]>key){
@@ -124,24 +127,33 @@ async function insertionSort(){
             a_copy[j+1]=a_copy[j];
             j1Bar.style.height=jBar.style.height;
             j1Bar.innerHTML=jBar.innerHTML;
-            jBar.style.backgroundColor="yellow";
+            jBar.style.backgroundColor="#f64c72";//checking
             await sleep(speed);
-            jBar.style.backgroundColor="#8ee4af";
+            jBar.style.backgroundColor="#5cdb95";//sorted
             j-=1;
         }
         chosen.style.color="black";
         chosen.innerHTML=`Found and inserted`;
-        keyBar.style.backgroundColor="#8ee4af";
+        keyBar.style.backgroundColor="#5cdb95";//sorted
         j1Bar=document.querySelector(`.bar${j+1}`);
         a_copy[j+1]=key;
         j1Bar.style.height=keyHeight;
-        j1Bar.style.backgroundColor="Pink";
-        j1Bar.innerHTML=`<span style="font-size:0.8em;">${key}</span>`;
+        j1Bar.style.backgroundColor="#3500d3";//selected
+        j1Bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${key}</b></span>`;
         await sleep(speed+100);
-        j1Bar.style.backgroundColor="#8ee4af";
+        j1Bar.style.backgroundColor="#5cdb95";//sorted
     }
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
+    await sleep(speed+500);
+    bars.innerHTML="";
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
+    }
 }
 
 async function selectionSort(){
@@ -149,34 +161,45 @@ async function selectionSort(){
     a_copy=[...a];
     for (let i=0;i<a_copy.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(a_copy[i])}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
         bars.appendChild(bar);
     }
     const n=a_copy.length;
     for (let i=0;i<n;i++){
         let min=i;
         let iBar=document.querySelector(`.bar${i}`);
-        iBar.style.backgroundColor="Pink";
+        iBar.style.backgroundColor="#3500d3";//selected
         await sleep(speed);
         for(let j=i+1;j<n;j++){
             let jBar=document.querySelector(`.bar${j}`);
-            jBar.style.backgroundColor="Yellow";
+            jBar.style.backgroundColor="#f64c72";//checking
             await sleep(speed);
             if (a_copy[j]<a_copy[min])
             min=j;
-            jBar.style.backgroundColor="#8ee4af";
+            jBar.style.backgroundColor="#17a2b8";//original
         }
         let minBar=document.querySelector(`.bar${min}`);
-        minBar.style.backgroundColor="Pink";
+        minBar.style.backgroundColor="#3500d3";//selected
         //swap the minimum value with the value at index i.
         let tempHeight=iBar.style.height;   let temp=a_copy[i]; let tempInner=iBar.innerHTML;
         iBar.style.height=minBar.style.height;  a_copy[i]=a_copy[min];  iBar.innerHTML=minBar.innerHTML;
         minBar.style.height=tempHeight; a_copy[min]=temp;   minBar.innerHTML=tempInner;
         await sleep(speed+100);
-        iBar.style.backgroundColor="#8ee4af";
-        minBar.style.backgroundColor="#8ee4af";
+        iBar.style.backgroundColor="#5cdb95";//sorted
+        minBar.style.backgroundColor="#17a2b8";//original
+        if(min==i)
+        minBar.style.backgroundColor="#5cdb95";//sorted
+    }
+    await sleep(speed+500);
+    bars.innerHTML="";
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
     }
 }
 
@@ -185,9 +208,9 @@ async function bubbleSort(){
     a_copy=[...a];
     for (let i=0;i<a_copy.length;i++){
         let bar=document.createElement("div");
-        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#8ee4af;margin:0em 0.285em;float:left;`;
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
         bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.8em;">${(a_copy[i])}</span>`;
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
         bars.appendChild(bar);
     }
     let n=a_copy.length;
@@ -219,8 +242,8 @@ async function bubbleSort(){
                 chosen.innerHTML=`No swap needed...`;
                 await sleep(speed+100);
             }
-            jBar.style.backgroundColor="#8ee4af";
-            j1Bar.style.backgroundColor="#8ee4af";
+            jBar.style.backgroundColor="#17a2b8";
+            j1Bar.style.backgroundColor="#17a2b8";
         }
         let lastBar=document.querySelector(`.bar${n-i-1}`);
         lastBar.style.backgroundColor="Blue";
@@ -234,6 +257,6 @@ async function bubbleSort(){
     await sleep(speed+200);
     for (let i=0;i<a_copy.length;i++){
         let bar=document.querySelector(`.bar${i}`);
-        bar.style.backgroundColor="#8ee4af";
+        bar.style.backgroundColor="#17a2b8";
     }
 }

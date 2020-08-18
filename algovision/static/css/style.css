@@ -115,7 +115,7 @@ a{
     border: 1px white solid;
     margin-top: 0.5em;
     border-radius: 50px;
-    width: 50em;
+    width: auto;
     height: 2em;
 }
 

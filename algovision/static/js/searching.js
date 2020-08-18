@@ -68,6 +68,7 @@ function StartSearching(){
         x=num.value;
         if(x>39||x<1){
             num_range.style.color="#d80702";//red
+            alert("The number should be in the range: [1,39]");
             return ;
         }
     }
@@ -88,6 +89,7 @@ function StartSearching(){
     else if(Algo==null){
         chosen.style.color="#d80702";//red
         chosen.innerHTML="Please Choose an algorithm first.";
+        alert("Please Choose an algorithm first.");
     }
 }
 
@@ -105,7 +107,7 @@ async function sequentialSearch(x){
     chosen.innerHTML=`Searching for ${x} with Sequential Search...`;
     for(let i=0;i<a.length;i++){
         let current_bar=document.querySelector(`.bar${i}`);
-        current_bar.style.backgroundColor="#f64c72";//checking-checking
+        current_bar.style.backgroundColor="#f64c72";//checking
         if(a[i]==(x/40)*100){
             await sleep(250);
             current_bar.style.backgroundColor="#5cdb95";//green-found
