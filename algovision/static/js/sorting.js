@@ -90,6 +90,15 @@ function startSorting(){
     else if(Algo=="Bubble"){
         bubbleSort();
     }
+    else if(Algo=="Merge"){
+        mergeSort();
+    }
+    else if (Algo=="Quick"){
+        quickSort();
+    }
+    else if (Algo=="Bucket"){
+        bucketSort();
+    }
     else if(Algo==null){
         chosen.style.color="#d80702";//red
         chosen.innerHTML="Please Choose an algorithm first.";
@@ -171,8 +180,12 @@ async function selectionSort(){
         let min=i;
         let iBar=document.querySelector(`.bar${i}`);
         iBar.style.backgroundColor="#3500d3";//selected
+        chosen.style.color="black";
+        chosen.innerHTML=`Selected ${a_copy[i]}!`;
         await sleep(speed);
         for(let j=i+1;j<n;j++){
+            chosen.style.color="black";
+            chosen.innerHTML=`Finding the minimum value in the right side...`;
             let jBar=document.querySelector(`.bar${j}`);
             jBar.style.backgroundColor="#f64c72";//checking
             await sleep(speed);
@@ -180,6 +193,8 @@ async function selectionSort(){
             min=j;
             jBar.style.backgroundColor="#17a2b8";//original
         }
+        chosen.style.color="black";
+        chosen.innerHTML=`Swapping ${a_copy[i]} with ${a_copy[min]}...`;
         let minBar=document.querySelector(`.bar${min}`);
         minBar.style.backgroundColor="#3500d3";//selected
         //swap the minimum value with the value at index i.
@@ -193,6 +208,8 @@ async function selectionSort(){
         minBar.style.backgroundColor="#5cdb95";//sorted
     }
     await sleep(speed+500);
+    chosen.style.color="black";
+    chosen.innerHTML=`SORTED!!`;
     bars.innerHTML="";
     for (let i=0;i<a_copy.length;i++){
         let bar=document.createElement("div");
@@ -219,15 +236,15 @@ async function bubbleSort(){
         for(let j=0;j<n-1-i;j++){//everytime the last element will become sorted.Hence, j<n-1-i
             let jBar=document.querySelector(`.bar${j}`);
             let j1Bar=document.querySelector(`.bar${j+1}`);
-            jBar.style.backgroundColor="Yellow";
-            j1Bar.style.backgroundColor="Yellow";
+            jBar.style.backgroundColor="#f64c72";//checking
+            j1Bar.style.backgroundColor="#f64c72";//checking
             chosen.style.color="black";
             chosen.innerHTML=`Comparing ${a_copy[j]} and ${a_copy[j+1]}...`;
             await sleep(speed);
             if(a_copy[j]>a_copy[j+1]){
                 //swap arr[j] and arr[j+1]
-                jBar.style.backgroundColor="Pink";
-                j1Bar.style.backgroundColor="Pink";
+                jBar.style.backgroundColor="#3500d3";//selected
+                j1Bar.style.backgroundColor="#3500d3";//selected
                 chosen.style.color="black";
                 chosen.innerHTML=`Swapping ${a_copy[j]} and ${a_copy[j+1]}...`;
                 await sleep(speed);
@@ -242,21 +259,68 @@ async function bubbleSort(){
                 chosen.innerHTML=`No swap needed...`;
                 await sleep(speed+100);
             }
-            jBar.style.backgroundColor="#17a2b8";
-            j1Bar.style.backgroundColor="#17a2b8";
+            jBar.style.backgroundColor="#17a2b8";//original
+            j1Bar.style.backgroundColor="#17a2b8";//original
         }
         let lastBar=document.querySelector(`.bar${n-i-1}`);
-        lastBar.style.backgroundColor="Blue";
+        lastBar.style.backgroundColor="#5cdb95";//sorted
     }
     for (let i=0;i<a_copy.length;i++){
         let bar=document.querySelector(`.bar${i}`);
-        bar.style.backgroundColor="Blue";
+        bar.style.backgroundColor="#5cdb95";//sorted
     }
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
     await sleep(speed+200);
     for (let i=0;i<a_copy.length;i++){
         let bar=document.querySelector(`.bar${i}`);
-        bar.style.backgroundColor="#17a2b8";
+        bar.style.backgroundColor="#17a2b8";//original
     }
+}
+
+async function mergeSort(){
+        /*Merge Sort is a Divide and Conquer algorithm.
+    It divides input array in two halves, 
+    calls itself for the two halves and,
+    then merges the two sorted halves.*/
+    let a=[...unsorted];
+    if(a.length<=1)
+        //if a contains only 1 or 0 element,
+        //no need to do anything.
+        return a;
+
+    //finding middle index of array.
+    let mid=Math.floor(a.length/2);
+    //slicing the array and copying the
+    //two halves in different arrays.
+    let left=a.slice(0,mid);
+    let right=a.slice(mid);
+    //merging the arrays after recursively calling
+    //itself on left and right part and then returning
+    //the merged array.
+    return merge(mergeSort(left),mergeSort(right));
+}
+
+async function merge(){
+    let resultArray=[],leftIndex=0,rightIndex=0;
+    while(leftIndex<left.length && rightIndex<right.length){
+        //picking the lesser one 
+        if(left[leftIndex]<=right[rightIndex]){
+            resultArray.push(left[leftIndex]);
+            leftIndex++;
+        }
+        else{
+            resultArray.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+    while(leftIndex<left.length){
+        resultArray.push(left[leftIndex]);
+        leftIndex++;
+    }
+    while(rightIndex<right.length){
+        resultArray.push(right[rightIndex]);
+        rightIndex++;
+    }
+    return resultArray;
 }
