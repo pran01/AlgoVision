@@ -27,6 +27,7 @@ function shuffle(array) {
     return array;
 }
 
+
 function heightwise(num){
     return (num/35)*100;
 }
@@ -279,48 +280,103 @@ async function bubbleSort(){
 }
 
 async function mergeSort(){
-        /*Merge Sort is a Divide and Conquer algorithm.
-    It divides input array in two halves, 
-    calls itself for the two halves and,
-    then merges the two sorted halves.*/
-    let a=[...unsorted];
-    if(a.length<=1)
-        //if a contains only 1 or 0 element,
-        //no need to do anything.
-        return a;
-
-    //finding middle index of array.
-    let mid=Math.floor(a.length/2);
-    //slicing the array and copying the
-    //two halves in different arrays.
-    let left=a.slice(0,mid);
-    let right=a.slice(mid);
-    //merging the arrays after recursively calling
-    //itself on left and right part and then returning
-    //the merged array.
-    return merge(mergeSort(left),mergeSort(right));
+    bars.innerHTML="";
+    a_copy=[...a];
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
+    }
+    let n=a_copy.length;
+    let currSize;
+    let leftStart;
+    for(currSize=1;currSize<=n-1;currSize=2*currSize){
+        for(leftStart=0;leftStart<n-1;leftStart+=2*currSize){
+            let mid=Math.min(leftStart+currSize,n);
+            let rightEnd=Math.min(leftStart+2*currSize,n);
+            // let left=sorted.slice(leftStart,mid);
+            // let right=sorted.slice(mid,rightEnd);
+            // sorted=mergeIterative(sorted,left,right);
+            merge(a_copy,leftStart,mid,rightEnd);
+        }
+    }
+    chosen.style.color="black";
+    chosen.innerHTML=`SORTED!!`;
 }
 
-async function merge(){
-    let resultArray=[],leftIndex=0,rightIndex=0;
+async function merge(a_copy,leftStart,mid,rightEnd){
+    let left=a_copy.slice(leftStart,mid);
+    let right=a_copy.slice(mid,rightEnd);
+    let leftIndex=0,rightIndex=0,k=leftStart;
     while(leftIndex<left.length && rightIndex<right.length){
         //picking the lesser one 
+        let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
+        let rightIndexBar=document.querySelector(`.bar${mid+rightIndex}`);
+        let kBar=document.querySelector(`.bar${k}`);
+        // leftIndexBar.style.backgroundColor="#f64c72";//checking
+        // rightIndexBar.style.backgroundColor="#f64c72";//checking
         if(left[leftIndex]<=right[rightIndex]){
-            resultArray.push(left[leftIndex]);
+            leftIndexBar.style.backgroundColor="#3500d3";//selected
+            rightIndexBar.style.backgroundColor="#17a2b8";//original
+            a_copy[k]=left[leftIndex];
+            kBar.style.height=`${(left[leftIndex]/35)*100}%`;
+            kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
+            kBar.style.backgroundColor="#5cdb95"//sorted
             leftIndex++;
+            k++;
         }
         else{
-            resultArray.push(right[rightIndex]);
+            rightIndexBar.style.backgroundColor="#3500d3";//selected
+            leftIndexBar.style.backgroundColor="#17a2b8";//original
+            a_copy[k]=right[rightIndex];
+            kBar.style.height=`${(right[rightIndex]/35)*100}%`;
+            kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
+            kBar.style.backgroundColor="#5cdb95"//sorted
             rightIndex++;
+            k++;
         }
+        // if (leftStart+leftIndex==k){
+        //     leftIndexBar.style.backgroundColor="#5cdb95";//sorted
+        //     rightIndexBar.style.backgroundColor="#17a2b8";//original
+        // }
+        // else if(mid+rightIndex==k){
+        //     leftIndexBar.style.backgroundColor="#17a2b8";//original
+        //     rightIndexBar.style.backgroundColor="#5cdb95";//sorted
+        // }
+        // else{
+        //     leftIndexBar.style.backgroundColor="#17a2b8";//original
+        //     rightIndexBar.style.backgroundColor="#17a2b8";//original
+        // }
+        leftIndexBar.style.backgroundColor="#17a2b8";//original
+        rightIndexBar.style.backgroundColor="#17a2b8";//original
+        kBar.style.backgroundColor="#5cdb95";//sorted
     }
-    while(leftIndex<left.length){
-        resultArray.push(left[leftIndex]);
+    while(leftIndex<left.length && k<a_copy.length){
+        let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
+        let kBar=document.querySelector(`.bar${k}`);
+        leftIndexBar.style.backgroundColor="#3500d3";//selected
+        a_copy[k]=left[leftIndex];
+        kBar.style.height=`${(left[leftIndex]/35)*100}%`;
+        kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
+        kBar.style.backgroundColor="#5cdb95";//sorted
         leftIndex++;
+        k++;
+        leftIndexBar.style.backgroundColor="#17a2b8";//original
+        kBar.style.backgroundColor="#5cdb95";//sorted
     }
-    while(rightIndex<right.length){
-        resultArray.push(right[rightIndex]);
+    while(rightIndex<right.length && k<a_copy.length){
+        let rightIndexBar=document.querySelector(`.bar${mid+rightIndex}`);
+        let kBar=document.querySelector(`.bar${k}`);
+        rightIndexBar.style.backgroundColor="#3500d3";//selected
+        a_copy[k]=right[rightIndex];
+        kBar.style.height=`${(right[rightIndex]/35)*100}%`;
+        kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
+        kBar.style.backgroundColor="#5cdb95"//sorted
         rightIndex++;
+        k++;
+        rightIndexBar.style.backgroundColor="#17a2b8";//original
+        kBar.style.backgroundColor="#5cdb95"//sorted
     }
-    return resultArray;
 }
