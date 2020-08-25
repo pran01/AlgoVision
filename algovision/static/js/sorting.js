@@ -318,21 +318,23 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         // leftIndexBar.style.backgroundColor="#f64c72";//checking
         // rightIndexBar.style.backgroundColor="#f64c72";//checking
         if(left[leftIndex]<=right[rightIndex]){
-            leftIndexBar.style.backgroundColor="#3500d3";//selected
-            rightIndexBar.style.backgroundColor="#17a2b8";//original
+            // leftIndexBar.style.backgroundColor="#3500d3";//selected
+            // rightIndexBar.style.backgroundColor="#17a2b8";//original
             a_copy[k]=left[leftIndex];
             kBar.style.height=`${(left[leftIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
+            await sleep(200);
             kBar.style.backgroundColor="#5cdb95"//sorted
             leftIndex++;
             k++;
         }
         else{
-            rightIndexBar.style.backgroundColor="#3500d3";//selected
-            leftIndexBar.style.backgroundColor="#17a2b8";//original
+            // rightIndexBar.style.backgroundColor="#3500d3";//selected
+            // leftIndexBar.style.backgroundColor="#17a2b8";//original
             a_copy[k]=right[rightIndex];
             kBar.style.height=`${(right[rightIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
+            await sleep(200);
             kBar.style.backgroundColor="#5cdb95"//sorted
             rightIndex++;
             k++;
@@ -349,34 +351,33 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         //     leftIndexBar.style.backgroundColor="#17a2b8";//original
         //     rightIndexBar.style.backgroundColor="#17a2b8";//original
         // }
-        leftIndexBar.style.backgroundColor="#17a2b8";//original
-        rightIndexBar.style.backgroundColor="#17a2b8";//original
-        kBar.style.backgroundColor="#5cdb95";//sorted
+        // leftIndexBar.style.backgroundColor="#17a2b8";//original
+        // rightIndexBar.style.backgroundColor="#17a2b8";//original
     }
     while(leftIndex<left.length && k<a_copy.length){
         let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
         let kBar=document.querySelector(`.bar${k}`);
-        leftIndexBar.style.backgroundColor="#3500d3";//selected
+        // leftIndexBar.style.backgroundColor="#3500d3";//selected
         a_copy[k]=left[leftIndex];
         kBar.style.height=`${(left[leftIndex]/35)*100}%`;
         kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
+        await sleep(200);
         kBar.style.backgroundColor="#5cdb95";//sorted
         leftIndex++;
         k++;
-        leftIndexBar.style.backgroundColor="#17a2b8";//original
-        kBar.style.backgroundColor="#5cdb95";//sorted
+        // leftIndexBar.style.backgroundColor="#17a2b8";//original
     }
     while(rightIndex<right.length && k<a_copy.length){
         let rightIndexBar=document.querySelector(`.bar${mid+rightIndex}`);
         let kBar=document.querySelector(`.bar${k}`);
-        rightIndexBar.style.backgroundColor="#3500d3";//selected
+        // rightIndexBar.style.backgroundColor="#3500d3";//selected
         a_copy[k]=right[rightIndex];
         kBar.style.height=`${(right[rightIndex]/35)*100}%`;
         kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
+        await sleep(200);
         kBar.style.backgroundColor="#5cdb95"//sorted
         rightIndex++;
         k++;
-        rightIndexBar.style.backgroundColor="#17a2b8";//original
-        kBar.style.backgroundColor="#5cdb95"//sorted
+        // rightIndexBar.style.backgroundColor="#17a2b8";//original
     }
 }
