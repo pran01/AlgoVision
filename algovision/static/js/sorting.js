@@ -33,7 +33,7 @@ function heightwise(num){
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function getAlgo(name){
@@ -91,8 +91,11 @@ function startSorting(){
     else if(Algo=="Bubble"){
         bubbleSort();
     }
-    else if(Algo=="Merge"){
+    else if(Algo=="MergeIttr"){
         mergeSort();
+    }
+    else if(Algo=="MergeRecur"){
+        mergeSortCaller();
     }
     else if (Algo=="Quick"){
         quickSort();
@@ -290,8 +293,9 @@ async function mergeSort(){
         bars.appendChild(bar);
     }
     let n=a_copy.length;
-    let currSize;
-    let leftStart;
+    let currSize=1;
+    let leftStart=0;
+
     for(currSize=1;currSize<=n-1;currSize=2*currSize){
         for(leftStart=0;leftStart<n-1;leftStart+=2*currSize){
             let mid=Math.min(leftStart+currSize,n);
@@ -299,8 +303,14 @@ async function mergeSort(){
             // let left=sorted.slice(leftStart,mid);
             // let right=sorted.slice(mid,rightEnd);
             // sorted=mergeIterative(sorted,left,right);
-            merge(a_copy,leftStart,mid,rightEnd);
+            await merge(a_copy,leftStart,mid,rightEnd);
         }
+    }
+
+    for (let i=0;i<a_copy.length;i++){
+        await sleep(speed);
+        let bar=document.querySelector(`.bar${i}`);
+        bar.style.backgroundColor="#5cdb95";//sorted
     }
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
@@ -315,27 +325,37 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
         let rightIndexBar=document.querySelector(`.bar${mid+rightIndex}`);
         let kBar=document.querySelector(`.bar${k}`);
-        // leftIndexBar.style.backgroundColor="#f64c72";//checking
-        // rightIndexBar.style.backgroundColor="#f64c72";//checking
+        
+        leftIndexBar.style.backgroundColor="#f64c72";//checking
+        rightIndexBar.style.backgroundColor="#f64c72";//checking
+        
         if(left[leftIndex]<=right[rightIndex]){
-            // leftIndexBar.style.backgroundColor="#3500d3";//selected
-            // rightIndexBar.style.backgroundColor="#17a2b8";//original
+            
+            await sleep(speed);
+            leftIndexBar.style.backgroundColor="#17a2b8";//original
+            rightIndexBar.style.backgroundColor="#17a2b8";//original
+            
+            kBar.style.backgroundColor="#3500d3";//selected
             a_copy[k]=left[leftIndex];
             kBar.style.height=`${(left[leftIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
-            await sleep(200);
-            kBar.style.backgroundColor="#5cdb95"//sorted
+            await sleep(speed);
+            kBar.style.backgroundColor="#17a2b8";//original
             leftIndex++;
             k++;
         }
         else{
-            // rightIndexBar.style.backgroundColor="#3500d3";//selected
-            // leftIndexBar.style.backgroundColor="#17a2b8";//original
+            
+            await sleep(speed);
+            rightIndexBar.style.backgroundColor="#17a2b8";//original
+            leftIndexBar.style.backgroundColor="#17a2b8";//original
+            
+            kBar.style.backgroundColor="#3500d3";//selected
             a_copy[k]=right[rightIndex];
             kBar.style.height=`${(right[rightIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
-            await sleep(200);
-            kBar.style.backgroundColor="#5cdb95"//sorted
+            await sleep(speed);
+            kBar.style.backgroundColor="#17a2b8";//original
             rightIndex++;
             k++;
         }
@@ -357,27 +377,157 @@ async function merge(a_copy,leftStart,mid,rightEnd){
     while(leftIndex<left.length && k<a_copy.length){
         let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
         let kBar=document.querySelector(`.bar${k}`);
-        // leftIndexBar.style.backgroundColor="#3500d3";//selected
+        
+        await sleep(speed);
+        leftIndexBar.style.backgroundColor="#f64c72";//checking
+        await sleep(speed);
+        leftIndexBar.style.backgroundColor="#17a2b8";//original
+        
+        kBar.style.backgroundColor="#3500d3";//selected
+        
         a_copy[k]=left[leftIndex];
         kBar.style.height=`${(left[leftIndex]/35)*100}%`;
         kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
-        await sleep(200);
-        kBar.style.backgroundColor="#5cdb95";//sorted
+        await sleep(speed);
+        kBar.style.backgroundColor="#17a2b8";//original
         leftIndex++;
         k++;
-        // leftIndexBar.style.backgroundColor="#17a2b8";//original
     }
     while(rightIndex<right.length && k<a_copy.length){
         let rightIndexBar=document.querySelector(`.bar${mid+rightIndex}`);
         let kBar=document.querySelector(`.bar${k}`);
-        // rightIndexBar.style.backgroundColor="#3500d3";//selected
+        
+        await sleep(speed);
+        rightIndexBar.style.backgroundColor="#f64c72";//checking
+        await sleep(speed);
+        rightIndexBar.style.backgroundColor="#17a2b8";//original
+        
+        kBar.style.backgroundColor="#3500d3";//selected
+
         a_copy[k]=right[rightIndex];
         kBar.style.height=`${(right[rightIndex]/35)*100}%`;
         kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
-        await sleep(200);
-        kBar.style.backgroundColor="#5cdb95"//sorted
+        
+        await sleep(speed);
+        kBar.style.backgroundColor="#17a2b8";//original
+        
         rightIndex++;
         k++;
-        // rightIndexBar.style.backgroundColor="#17a2b8";//original
     }
+}
+
+async function mergeSortCaller(){
+    bars.innerHTML="";
+    a_copy=[...a];
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
+    }
+    await mergeSortRecursive(a_copy,0,a_copy.length-1);
+    for (let i=0;i<a_copy.length;i++){
+        await sleep(speed);
+        let bar=document.querySelector(`.bar${i}`);
+        bar.style.backgroundColor="#5cdb95";//sorted
+    }
+    chosen.style.color="black";
+    chosen.innerHTML=`SORTED!!`;
+}
+
+async function mergeRecursive(arr, l, m, r) 
+    { 
+        // Find sizes of two subarrays to be merged 
+        let n1 = m - l + 1; 
+        let n2 = r - m; 
+        /* Create temp arrays */
+        let L = arr.slice(l,m+1); 
+        let R = arr.slice(m+1,r+1);
+        
+        // Initial indexes of first and second subarrays 
+        let i = 0, j = 0; 
+
+        // Initial index of merged subarry array 
+        let k = l; 
+        
+
+        while (i < n1 && j < n2) {
+            let leftIdxBar=document.querySelector(`.bar${l+i}`);
+            let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
+            let kBar=document.querySelector(`.bar${k}`);
+            
+            await sleep(speed);
+            leftIdxBar.style.backgroundColor="#f64c72";//checking
+            rightIdxBar.style.backgroundColor="#f64c72";//checking
+            await sleep(speed);
+            leftIdxBar.style.backgroundColor="#17a2b8";//original
+            rightIdxBar.style.backgroundColor="#17a2b8";//original
+
+            kBar.style.backgroundColor="#3500d3";//selected
+            if (L[i] <= R[j]) { 
+                arr[k] = L[i];
+                kBar.style.height=`${(L[i]/35)*100}%`;
+                kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(L[i])}</b></span>`;
+                i++; 
+            } 
+            else { 
+                arr[k] = R[j]; 
+                kBar.style.height=`${(R[j]/35)*100}%`;
+                kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(R[j])}</b></span>`;
+                j++; 
+            } 
+            k++; 
+            await sleep(speed);
+            kBar.style.backgroundColor="#17a2b8";//original
+        } 
+        /* Copy remaining elements of L[] if any */
+        while (i < n1) { 
+
+            let leftIdxBar=document.querySelector(`.bar${l+i}`);
+            let kBar=document.querySelector(`.bar${k}`);
+            await sleep(speed);
+            leftIdxBar.style.backgroundColor="#f64c72";//checking
+            await sleep(speed);
+            leftIdxBar.style.backgroundColor="#17a2b8";//original
+
+            kBar.style.backgroundColor="#3500d3";//selected
+            arr[k] = L[i]; 
+            kBar.style.height=`${(L[i]/35)*100}%`;
+            kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(L[i])}</b></span>`;
+            i++; 
+            k++; 
+            kBar.style.backgroundColor="#17a2b8";//original
+        } 
+        /* Copy remaining elements of R[] if any */
+        while (j < n2) { 
+            let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
+            let kBar=document.querySelector(`.bar${k}`);
+            await sleep(speed);
+            rightIdxBar.style.backgroundColor="#f64c72";//checking
+            await sleep(speed);
+            rightIdxBar.style.backgroundColor="#17a2b8";//original
+            kBar.style.backgroundColor="#3500d3";//selected
+
+            arr[k] = R[j]; 
+            kBar.style.height=`${(R[j]/35)*100}%`;
+            kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(R[j])}</b></span>`;
+            j++; 
+            k++; 
+            kBar.style.backgroundColor="#17a2b8";//original
+        } 
+    } 
+
+    
+async function mergeSortRecursive(arr,l,r) 
+{ 
+    if (l==r)
+    return;
+    // Find the middle point 
+    let m = Math.floor((l + r) / 2); 
+    // Sort first and second halves 
+    await mergeSortRecursive(arr, l, m); 
+    await mergeSortRecursive(arr, m + 1, r); 
+    // Merge the sorted halves 
+    await mergeRecursive(arr, l, m, r); 
 }
