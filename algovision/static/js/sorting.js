@@ -158,15 +158,6 @@ async function insertionSort(){
     }
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
-    await sleep(speed+500);
-    bars.innerHTML="";
-    for (let i=0;i<a_copy.length;i++){
-        let bar=document.createElement("div");
-        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
-        bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
-        bars.appendChild(bar);
-    }
 }
 
 async function selectionSort(){
@@ -214,14 +205,6 @@ async function selectionSort(){
     await sleep(speed+500);
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
-    bars.innerHTML="";
-    for (let i=0;i<a_copy.length;i++){
-        let bar=document.createElement("div");
-        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
-        bar.classList.add(`bar${i}`);
-        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
-        bars.appendChild(bar);
-    }
 }
 
 async function bubbleSort(){
@@ -275,11 +258,6 @@ async function bubbleSort(){
     }
     chosen.style.color="black";
     chosen.innerHTML=`SORTED!!`;
-    await sleep(speed+200);
-    for (let i=0;i<a_copy.length;i++){
-        let bar=document.querySelector(`.bar${i}`);
-        bar.style.backgroundColor="#17a2b8";//original
-    }
 }
 
 async function mergeSort(){
@@ -300,9 +278,6 @@ async function mergeSort(){
         for(leftStart=0;leftStart<n-1;leftStart+=2*currSize){
             let mid=Math.min(leftStart+currSize,n);
             let rightEnd=Math.min(leftStart+2*currSize,n);
-            // let left=sorted.slice(leftStart,mid);
-            // let right=sorted.slice(mid,rightEnd);
-            // sorted=mergeIterative(sorted,left,right);
             await merge(a_copy,leftStart,mid,rightEnd);
         }
     }
@@ -329,6 +304,9 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         leftIndexBar.style.backgroundColor="#f64c72";//checking
         rightIndexBar.style.backgroundColor="#f64c72";//checking
         
+        chosen.style.color="black";
+        chosen.innerHTML=`Comparing values at index ${leftStart+leftIndex} and ${mid+rightIndex}...`;
+
         if(left[leftIndex]<=right[rightIndex]){
             
             await sleep(speed);
@@ -337,6 +315,9 @@ async function merge(a_copy,leftStart,mid,rightEnd){
             
             kBar.style.backgroundColor="#3500d3";//selected
             a_copy[k]=left[leftIndex];
+            chosen.style.color="black";
+            chosen.innerHTML=`Pushing value at index ${leftStart+leftIndex} to ${k}...`;
+
             kBar.style.height=`${(left[leftIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
             await sleep(speed);
@@ -351,6 +332,9 @@ async function merge(a_copy,leftStart,mid,rightEnd){
             leftIndexBar.style.backgroundColor="#17a2b8";//original
             
             kBar.style.backgroundColor="#3500d3";//selected
+            chosen.style.color="black";
+            chosen.innerHTML=`Pushing value at index ${mid+rightIndex} to ${k}...`;
+
             a_copy[k]=right[rightIndex];
             kBar.style.height=`${(right[rightIndex]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(right[rightIndex])}</b></span>`;
@@ -359,20 +343,6 @@ async function merge(a_copy,leftStart,mid,rightEnd){
             rightIndex++;
             k++;
         }
-        // if (leftStart+leftIndex==k){
-        //     leftIndexBar.style.backgroundColor="#5cdb95";//sorted
-        //     rightIndexBar.style.backgroundColor="#17a2b8";//original
-        // }
-        // else if(mid+rightIndex==k){
-        //     leftIndexBar.style.backgroundColor="#17a2b8";//original
-        //     rightIndexBar.style.backgroundColor="#5cdb95";//sorted
-        // }
-        // else{
-        //     leftIndexBar.style.backgroundColor="#17a2b8";//original
-        //     rightIndexBar.style.backgroundColor="#17a2b8";//original
-        // }
-        // leftIndexBar.style.backgroundColor="#17a2b8";//original
-        // rightIndexBar.style.backgroundColor="#17a2b8";//original
     }
     while(leftIndex<left.length && k<a_copy.length){
         let leftIndexBar=document.querySelector(`.bar${leftStart+leftIndex}`);
@@ -384,7 +354,9 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         leftIndexBar.style.backgroundColor="#17a2b8";//original
         
         kBar.style.backgroundColor="#3500d3";//selected
-        
+        chosen.style.color="black";
+        chosen.innerHTML=`Pushing value at index ${leftStart+leftIndex} to ${k}...`;
+
         a_copy[k]=left[leftIndex];
         kBar.style.height=`${(left[leftIndex]/35)*100}%`;
         kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(left[leftIndex])}</b></span>`;
@@ -403,6 +375,8 @@ async function merge(a_copy,leftStart,mid,rightEnd){
         rightIndexBar.style.backgroundColor="#17a2b8";//original
         
         kBar.style.backgroundColor="#3500d3";//selected
+        chosen.style.color="black";
+        chosen.innerHTML=`Pushing value at index ${mid+rightIndex} to ${k}...`;
 
         a_copy[k]=right[rightIndex];
         kBar.style.height=`${(right[rightIndex]/35)*100}%`;
@@ -436,89 +410,102 @@ async function mergeSortCaller(){
     chosen.innerHTML=`SORTED!!`;
 }
 
-async function mergeRecursive(arr, l, m, r) 
-    { 
-        // Find sizes of two subarrays to be merged 
-        let n1 = m - l + 1; 
-        let n2 = r - m; 
-        /* Create temp arrays */
-        let L = arr.slice(l,m+1); 
-        let R = arr.slice(m+1,r+1);
+async function mergeRecursive(arr, l, m, r) { 
+    // Find sizes of two subarrays to be merged 
+    let n1 = m - l + 1; 
+    let n2 = r - m; 
+    /* Create temp arrays */
+    let L = arr.slice(l,m+1); 
+    let R = arr.slice(m+1,r+1);
+    
+    // Initial indexes of first and second subarrays 
+    let i = 0, j = 0; 
+
+    // Initial index of merged subarry array 
+    let k = l; 
+    
+
+    while (i < n1 && j < n2) {
+        let leftIdxBar=document.querySelector(`.bar${l+i}`);
+        let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
+        let kBar=document.querySelector(`.bar${k}`);
         
-        // Initial indexes of first and second subarrays 
-        let i = 0, j = 0; 
+        await sleep(speed);
+        leftIdxBar.style.backgroundColor="#f64c72";//checking
+        rightIdxBar.style.backgroundColor="#f64c72";//checking
+        chosen.style.color="black";
+        chosen.innerHTML=`Comparing values at index ${l+i} and ${m+1+j}...`;
 
-        // Initial index of merged subarry array 
-        let k = l; 
+        await sleep(speed);
+        leftIdxBar.style.backgroundColor="#17a2b8";//original
+        rightIdxBar.style.backgroundColor="#17a2b8";//original
+
+        kBar.style.backgroundColor="#3500d3";//selected
         
-
-        while (i < n1 && j < n2) {
-            let leftIdxBar=document.querySelector(`.bar${l+i}`);
-            let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
-            let kBar=document.querySelector(`.bar${k}`);
-            
-            await sleep(speed);
-            leftIdxBar.style.backgroundColor="#f64c72";//checking
-            rightIdxBar.style.backgroundColor="#f64c72";//checking
-            await sleep(speed);
-            leftIdxBar.style.backgroundColor="#17a2b8";//original
-            rightIdxBar.style.backgroundColor="#17a2b8";//original
-
-            kBar.style.backgroundColor="#3500d3";//selected
-            if (L[i] <= R[j]) { 
-                arr[k] = L[i];
-                kBar.style.height=`${(L[i]/35)*100}%`;
-                kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(L[i])}</b></span>`;
-                i++; 
-            } 
-            else { 
-                arr[k] = R[j]; 
-                kBar.style.height=`${(R[j]/35)*100}%`;
-                kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(R[j])}</b></span>`;
-                j++; 
-            } 
-            k++; 
-            await sleep(speed);
-            kBar.style.backgroundColor="#17a2b8";//original
-        } 
-        /* Copy remaining elements of L[] if any */
-        while (i < n1) { 
-
-            let leftIdxBar=document.querySelector(`.bar${l+i}`);
-            let kBar=document.querySelector(`.bar${k}`);
-            await sleep(speed);
-            leftIdxBar.style.backgroundColor="#f64c72";//checking
-            await sleep(speed);
-            leftIdxBar.style.backgroundColor="#17a2b8";//original
-
-            kBar.style.backgroundColor="#3500d3";//selected
-            arr[k] = L[i]; 
+        if (L[i] <= R[j]) { 
+            arr[k] = L[i];
             kBar.style.height=`${(L[i]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(L[i])}</b></span>`;
-            i++; 
-            k++; 
-            kBar.style.backgroundColor="#17a2b8";//original
-        } 
-        /* Copy remaining elements of R[] if any */
-        while (j < n2) { 
-            let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
-            let kBar=document.querySelector(`.bar${k}`);
-            await sleep(speed);
-            rightIdxBar.style.backgroundColor="#f64c72";//checking
-            await sleep(speed);
-            rightIdxBar.style.backgroundColor="#17a2b8";//original
-            kBar.style.backgroundColor="#3500d3";//selected
+            chosen.style.color="black";
+            chosen.innerHTML=`Pushing value at index ${l+i} to ${k}...`;
 
+            i++; 
+        } 
+        else { 
             arr[k] = R[j]; 
             kBar.style.height=`${(R[j]/35)*100}%`;
             kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(R[j])}</b></span>`;
-            j++; 
-            k++; 
-            kBar.style.backgroundColor="#17a2b8";//original
-        } 
-    } 
+            chosen.style.color="black";
+            chosen.innerHTML=`Pushing value at index ${m+1+j} to ${k}...`;
 
-    
+            j++; 
+        } 
+        k++; 
+        await sleep(speed);
+        kBar.style.backgroundColor="#17a2b8";//original
+    } 
+    /* Copy remaining elements of L[] if any */
+    while (i < n1) { 
+
+        let leftIdxBar=document.querySelector(`.bar${l+i}`);
+        let kBar=document.querySelector(`.bar${k}`);
+        await sleep(speed);
+        leftIdxBar.style.backgroundColor="#f64c72";//checking
+        await sleep(speed);
+        leftIdxBar.style.backgroundColor="#17a2b8";//original
+
+        kBar.style.backgroundColor="#3500d3";//selected
+        arr[k] = L[i]; 
+        kBar.style.height=`${(L[i]/35)*100}%`;
+        kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(L[i])}</b></span>`;
+        chosen.style.color="black";
+        chosen.innerHTML=`Pushing value at index ${l+i} to ${k}...`;
+
+        i++; 
+        k++; 
+        kBar.style.backgroundColor="#17a2b8";//original
+    } 
+    /* Copy remaining elements of R[] if any */
+    while (j < n2) { 
+        let rightIdxBar=document.querySelector(`.bar${m+1+j}`);
+        let kBar=document.querySelector(`.bar${k}`);
+        await sleep(speed);
+        rightIdxBar.style.backgroundColor="#f64c72";//checking
+        await sleep(speed);
+        rightIdxBar.style.backgroundColor="#17a2b8";//original
+        kBar.style.backgroundColor="#3500d3";//selected
+        arr[k] = R[j]; 
+        kBar.style.height=`${(R[j]/35)*100}%`;
+        kBar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(R[j])}</b></span>`;
+        chosen.style.color="black";
+        chosen.innerHTML=`Pushing value at index ${m+1+j} to ${k}...`;
+        j++; 
+        k++; 
+        kBar.style.backgroundColor="#17a2b8";//original
+    } 
+} 
+
+
 async function mergeSortRecursive(arr,l,r) 
 { 
     if (l==r)
@@ -530,4 +517,74 @@ async function mergeSortRecursive(arr,l,r)
     await mergeSortRecursive(arr, m + 1, r); 
     // Merge the sorted halves 
     await mergeRecursive(arr, l, m, r); 
+}
+
+
+async function quickSort(){
+    bars.innerHTML="";
+    a_copy=[...a];
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
+    }
+    let l=0;
+    let h=a_copy.length-1;
+    await quickSortHelper(a_copy,l,h);
+    for (let i=0;i<a_copy.length;i++){
+        await sleep(speed);
+        let bar=document.querySelector(`.bar${i}`);
+        bar.style.backgroundColor="#5cdb95";//sorted
+    }
+    chosen.style.color="black";
+    chosen.innerHTML=`SORTED!!`;
+}
+
+async function quickSortHelper(a,l,h){
+    if(l-h>=0)
+    return;
+    let pi=await partition(a,l,h);
+    await quickSortHelper(a,l,pi-1);
+    await quickSortHelper(a,pi+1,h);
+}
+
+async function partition(a,l,h){
+    let pivot=a[h];
+    await sleep(speed);
+    chosen.style.color="black";
+    chosen.innerHTML=`${a[h]} is selected as pivot.`;
+    let pivotBar=document.querySelector(`.bar${h}`);
+    await sleep(speed);
+    pivotBar.style.backgroundColor="#3500d3";//selected
+    let i=l-1;
+    let temp,tempHeight,tempInner;
+    chosen.style.color="black";
+    chosen.innerHTML=`Finding the right place for the pivot...`;
+    for (let j=l;j<h;j++){
+        let iBar=document.querySelector(`.bar${i}`);
+        let jBar=document.querySelector(`.bar${j}`);
+        await sleep(speed);
+        jBar.style.backgroundColor="#f64c72";//checking
+        if(a[j]<pivot){
+            i++;
+            let iBar=document.querySelector(`.bar${i}`);
+            temp=a[i];tempHeight=iBar.style.height;tempInner=iBar.innerHTML;
+            a[i]=a[j];iBar.style.height=jBar.style.height;iBar.innerHTML=jBar.innerHTML;
+            a[j]=temp;jBar.style.height=tempHeight;jBar.innerHTML=tempInner;
+        }
+        await sleep(speed);
+        jBar.style.backgroundColor="#17a2b8";//original
+    }
+    let i1Bar=document.querySelector(`.bar${i+1}`);
+    temp=a[i+1];tempHeight=i1Bar.style.height;tempInner=i1Bar.innerHTML;
+    a[i+1]=a[h];i1Bar.style.height=pivotBar.style.height;i1Bar.innerHTML=pivotBar.innerHTML;
+    a[h]=temp;pivotBar.style.height=tempHeight;pivotBar.innerHTML=tempInner;
+    chosen.style.color="black";
+    chosen.innerHTML=`Found and swapped with ${a[i+1]}.`;
+    await sleep(speed);
+    pivotBar.style.backgroundColor="#17a2b8";//original
+    i1Bar.style.backgroundColor="#5cdb95";//sorted
+    return i+1;
 }

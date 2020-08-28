@@ -21,6 +21,16 @@ a{
     text-decoration: none;
 }
 
+.home-buttons{
+    color: black; 
+    margin-left: 3em;
+}
+
+.home-buttons:hover{
+    margin-top:0.5%;
+    box-shadow:5px 5px 0px white;
+}
+
 .bars{
     border-top: 3px white solid;
     border-bottom: 3px white solid;
@@ -33,7 +43,7 @@ a{
 }
 
 .searching-algos{
-    border: 1px white solid;
+    border: 2px white double;
     margin-top: 0.5em;
     border-radius: 50px;
     width: 50em;
