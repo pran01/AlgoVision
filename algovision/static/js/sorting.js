@@ -100,8 +100,8 @@ function startSorting(){
     else if (Algo=="Quick"){
         quickSort();
     }
-    else if (Algo=="Bucket"){
-        bucketSort();
+    else if (Algo=="Heap"){
+        heapSort();
     }
     else if(Algo==null){
         chosen.style.color="#d80702";//red
@@ -587,4 +587,46 @@ async function partition(a,l,h){
     pivotBar.style.backgroundColor="#17a2b8";//original
     i1Bar.style.backgroundColor="#5cdb95";//sorted
     return i+1;
+}
+
+//Function to turn the array into a
+//max heap with root at index i.
+function heapify(arr,length,i){
+    let largest=i;
+    let left=i*2+1;
+    let right=left+1;
+    if (left<length && arr[left]>arr[largest])
+        largest=left;
+    if (right<length && arr[right]>arr[largest])
+        largest=right;
+    if(largest!=i){
+        [arr[largest],arr[i]]=[arr[i],arr[largest]];
+        heapify(arr,length,largest);
+    }
+}
+
+//The main function that sorts the array.
+function heapSort(){
+    bars.innerHTML="";
+    let a_copy=[...a];
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.createElement("div");
+        bar.style=`height: ${(a_copy[i]/35)*100}%;width:${33/40}em;background:#17a2b8;margin:0em 0.285em;float:left;`;
+        bar.classList.add(`bar${i}`);
+        bar.innerHTML=`<span style="font-size:0.7em;color:black;"><b>${(a_copy[i])}</b></span>`;
+        bars.appendChild(bar);
+    }
+    let length=a_copy.length;
+    let i=Math.floor((length/2)-1);
+    let j=length-1;
+    while (i>=0){
+        heapify(a_copy,length,i);
+        i--;
+    }
+
+    while (j>=0){
+        [a_copy[0],a_copy[j]]=[a_copy[j],a_copy[0]];
+        heapify(a_copy,j,0);
+        j--;
+    }
 }
