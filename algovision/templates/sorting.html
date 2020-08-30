@@ -30,19 +30,19 @@
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo4" value="MergeIttr">
-            <label class="form-check-label" for="inlineRadio4"><u><a data-toggle="modal" data-target=""><b> Merge(Iterative)</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio4"><u><a data-toggle="modal" data-target="#MergeIttrModal"><b> Merge(Iterative)</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo5" value="MergeRecur">
-            <label class="form-check-label" for="inlineRadio5"><u><a data-toggle="modal" data-target=""><b> Merge(Recursive)</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio5"><u><a data-toggle="modal" data-target="#MergeRecurModal"><b> Merge(Recursive)</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo6" value="Quick">
-            <label class="form-check-label" for="inlineRadio6"><u><a data-toggle="modal" data-target=""><b> Quick</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio6"><u><a data-toggle="modal" data-target="#QuickModal"><b> Quick</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo7" value="Heap">
-            <label class="form-check-label" for="inlineRadio7"><u><a data-toggle="modal" data-target=""><b> Heap</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio7"><u><a data-toggle="modal" data-target="#HeapModal"><b> Heap</b></a></u></label>
         </div>
     </div>
     <div class="container text-center search-parameters">
@@ -200,17 +200,17 @@ function bubbleSort(arr){
         for(let j=0;j&lt;n-1-i;j++){
             <span style="color: gray;">//everytime the last element will
            //become sorted. Hence, j&lt;n-1-i</span>
-            if(sorted[j]>sorted[j+1]){
+            if(arr[j]>arr[j+1]){
                 <span style="color: gray;">//swap arr[j] and arr[j+1]</span>
-                let temp=sorted[j];
-                sorted[j]=sorted[j+1];
-                sorted[j+1]=temp;
+                let temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
                 swapped=true;
             }
         }
         if(swapped==false){
             <span style="color: gray;">//it means the array was already sorted.</span>
-            return sorted;
+            return arr;
         }
     }
     return sorted;
@@ -223,6 +223,325 @@ function bubbleSort(arr){
         </div>
         </div>
     </div>
+</div>
+
+
+<!--MergeIttrModal-->
+<div class="modal fade" id="MergeIttrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Merge Sort(Itterative)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*Merge Sort is a Divide and Conquer algorithm.
+It divides input array in two halves, 
+calls itself for the two halves and,
+then merges the two sorted halves.
+<b style="font-size:larger;">Code: </b>
+function mergeSortIterative(arr){
+    let n=arr.length;
+    let currSize;
+    let leftStart;
+    for(currSize=1;currSize<=n-1;currSize=2*currSize){
+        for(leftStart=0;leftStart&lt;n-1;leftStart+=2*currSize){
+            let mid=Math.min(leftStart+currSize,n);
+            let rightEnd=Math.min(leftStart+2*currSize,n);
+            mergeIterative(arr,leftStart,mid,rightEnd);
+        }
+    }
+    return arr;
+}
+function mergeIterative(arr,leftStart,mid,rightEnd){
+    let left=arr.slice(leftStart,mid);
+    let right=arr.slice(mid,rightEnd);
+    let leftIndex=0,rightIndex=0,k=leftStart;
+    while(leftIndex&lt;left.length && rightIndex&lt;right.length){
+        //picking the lesser one 
+        if(left[leftIndex]<=right[rightIndex]){
+            arr[k]=left[leftIndex];
+            leftIndex++;
+            k++;
+        }
+        else{
+            arr[k]=right[rightIndex];
+            rightIndex++;
+            k++;
+        }
+    }
+    while(leftIndex&lt;left.length && k&lt;arr.length){
+        arr[k]=left[leftIndex];
+        leftIndex++;
+        k++;
+    }
+    while(rightIndex&lt;right.length && k&lt;arr.length){
+        arr[k]=right[rightIndex];
+        rightIndex++;
+        k++;
+    }
+}
+        </pre>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/iterative-merge-sort/">More Info</a>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MergeRecurModal-->
+<div class="modal fade" id="MergeRecurModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Merge Sort(Recursive)</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*Merge Sort is a Divide and Conquer algorithm.
+It divides input array in two halves, 
+calls itself for the two halves and,
+then merges the two sorted halves.
+<b style="font-size:larger;">Code: </b>
+function mergeSortRecursive(unsorted){
+    let a=[...unsorted];
+    if(a.length&lt;=1)
+        <span style="color: gray;">//if a contains only 1 or 0 element,
+       //no need to do anything.</span>
+        return a;
+
+    <span style="color: gray;">//finding middle index of array.</span>
+    let mid=Math.floor(a.length/2);
+    <span style="color: gray;">//slicing the array and copying the
+    //two halves in different arrays.</span>
+    let left=a.slice(0,mid);
+    let right=a.slice(mid);
+    <span style="color: gray;">//merging the arrays after recursively calling
+    //itself on left and right part and then returning
+    //the merged array.</span>
+    return mergeRecursive(mergeSortRecursive(left),mergeSortRecursive(right));
+}
+
+<span style="color: gray;">//The function for the key process of merging
+//the two arrays.</span>
+function mergeRecursive(left,right){
+    let resultArray=[],leftIndex=0,rightIndex=0;
+    while(leftIndex&lt;left.length && rightIndex&lt;right.length){
+        <span style="color: gray;">//picking the lesser one</span>
+        if(left[leftIndex]&lt;=right[rightIndex]){
+            resultArray.push(left[leftIndex]);
+            leftIndex++;
+        }
+        else{
+            resultArray.push(right[rightIndex]);
+            rightIndex++;
+        }
+    }
+    while(leftIndex&lt;left.length){
+        resultArray.push(left[leftIndex]);
+        leftIndex++;
+    }
+    while(rightIndex&lt;right.length){
+        resultArray.push(right[rightIndex]);
+        rightIndex++;
+    }
+    return resultArray;
+}
+        </pre>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/merge-sort/">More Info</a>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--QuickModal-->
+<div class="modal fade" id="QuickModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Quick Sort</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*Like Merge Sort, QuickSort is 
+a Divide and Conquer algorithm.
+It picks an element as pivot and 
+partitions the given array 
+around the picked pivot.
+<b style="font-size:larger;">Code: </b>
+function quickSort(arr){
+    let a=[...arr];
+    let l=0;<span style="color: gray;">//low index</span>
+    let h=a.length-1;<span style="color: gray;">//high index</span>
+    quickSortHelper(a,l,h);
+    return a;
+}
+
+<span style="color: gray;">//The helper function for quick sort.</span>
+function quickSortHelper(a,l,h){
+    <span style="color: gray;">//the base condition
+   //to end the recursion.</span>
+    if(l-h>=0)
+    return;
+    <span style="color: gray;">//select the Pivot index
+    //after partitioning.</span>
+    let pi=partition(a,l,h);
+    <span style="color: gray;">//call the same function
+    //to do partition on the left side
+    //array of pivot index.</span>
+    quickSortHelper(a,l,pi-1);
+    <span style="color: gray;">//to do partition on the right side
+    //array of pivot index.</span>
+    quickSortHelper(a,pi+1,h);
+}
+
+function partition(a,l,h){
+    <span style="color: gray;">/*Target of partitions is, 
+    given an array and an element x of array as pivot, 
+    put x at its correct position in sorted array 
+    and put all smaller elements (smaller than x) before x, 
+    and put all greater elements (greater than x) after x. 
+    All this should be done in linear time.*/</span>
+
+    <span style="color: gray;">//select the element at high index as pivot.</span>
+    let pivot=a[h];
+    <span style="color: gray;">//i=index with lower element.</span>
+    let i=l-1;
+    let temp;
+    for (let j=l;j&lt;h;j++){
+        <span style="color: gray;">//check every element of array from low to high-1.</span>
+        if(a[j]&lt;pivot){
+            <span style="color: gray;">//if the number is less than pivot
+            //swap the number with number at index i.</span>
+            i++;
+            temp=a[i];
+            a[i]=a[j];
+            a[j]=temp;
+        }
+    }
+    <span style="color: gray;">//after swapping all the elements less than pivot,
+    //put pivot at the next index.</span>
+    temp=a[i+1];
+    a[i+1]=a[h];
+    a[h]=temp;
+    <span style="color: gray;">//return the index of pivot.</span>
+    return i+1;
+}
+</pre>
+</div>
+<div class="modal-footer">
+    <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/quick-sort/">More Info</a>
+    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<!--HeapModal-->
+<div class="modal fade" id="HeapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Heap Sort</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*Heap sort is a comparison based 
+sorting technique based on Binary Heap data structure. 
+It is similar to selection sort where we first find 
+the maximum element and place the maximum element 
+at the end. We repeat the same process for 
+the remaining elements.
+<b style="font-size:larger;">Code: </b>
+<span style="color: gray;">//Function to turn the array into a
+//max heap with root at index i.</span>
+function heapify(arr,length,i){
+    <span style="color: gray;">//largest is the index with the
+    //largest element.</span>
+    let largest=i;
+    <span style="color: gray;">//pointing to the left child</span>
+    let left=i*2+1;
+    <span style="color: gray;">//pointing to the right child</span>
+    let right=left+1;
+    <span style="color: gray;">//if left child has the greater value,
+    //let largest point to the left child</span>
+    if (left&lt;length && arr[left]>arr[largest])
+        largest=left;
+    <span style="color: gray;">//similarly check the right child.</span>
+    if (right&lt;length && arr[right]>arr[largest])
+        largest=right;
+    <span style="color: gray;">//if at last, largest is pointing to
+    //either of the child, swap it with the parent.</span>
+    if(largest!=i){
+        [arr[largest],arr[i]]=[arr[i],arr[largest]];
+        <span style="color: gray;">//and then call heapify recursively
+        //to make sure all the nodes below are in order.</span>
+        heapify(arr,length,largest);
+    }
+}
+
+<span style="color: gray;">//The main function that sorts the array.</span>
+function heapSort(a){
+    let arr=[...a];
+    let length=arr.length;
+    <span style="color: gray;">//last parent of the heap is always
+    //equal to (arr.length/2)-1 in the array.</span>
+    let i=Math.floor((length/2)-1);
+    <span style="color: gray;">//last child of the heap is always in
+    //the last index of the array.</span>
+    let j=length-1;
+    while (i>=0){
+        <span style="color: gray;">//starting from the last parent
+        //heapify the way back up to convert
+        //the array into a max-heap.</span>
+        heapify(arr,length,i);
+        i--;
+    }
+
+    while (j>=0){
+        <span style="color: gray;">//swap the last element with the root node.</span>
+        [arr[0],arr[j]]=[arr[j],arr[0]];
+        <span style="color: gray;">//as j indicates the last element, it
+        //can also be used as the decremented length.</span>
+        heapify(arr,j,0);
+        <span style="color: gray;">//decrease the length by 1, as the
+        //last element is considered removed.</span>
+        j--;
+    }
+    return arr;
+}
+</pre>
+</div>
+<div class="modal-footer">
+    <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/heap-sort/">More Info</a>
+    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
 </div>
 
 
