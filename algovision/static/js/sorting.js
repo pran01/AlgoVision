@@ -591,22 +591,47 @@ async function partition(a,l,h){
 
 //Function to turn the array into a
 //max heap with root at index i.
-function heapify(arr,length,i){
+async function heapify(arr,length,i){
+    chosen.style.color="black";
+    chosen.innerHTML=`Turning the remaining array into max heap...`;
     let largest=i;
     let left=i*2+1;
     let right=left+1;
+    let rightBar=document.querySelector(`.bar${right}`);
+    let leftBar=document.querySelector(`.bar${left}`);
+    let iBar=document.querySelector(`.bar${i}`);
+    await sleep(speed);
+    iBar.style.backgroundColor="#3500d3";//selected
+    if (left<length)
+    leftBar.style.backgroundColor="#f64c72";//checking
+    if (right<length)
+    rightBar.style.backgroundColor="#f64c72";//checking
     if (left<length && arr[left]>arr[largest])
         largest=left;
     if (right<length && arr[right]>arr[largest])
         largest=right;
     if(largest!=i){
+        let largestBar=document.querySelector(`.bar${largest}`);
+        iBar=document.querySelector(`.bar${i}`);
         [arr[largest],arr[i]]=[arr[i],arr[largest]];
-        heapify(arr,length,largest);
+        [largestBar.style.height,iBar.style.height]=[iBar.style.height,largestBar.style.height];
+        [largestBar.innerHTML,iBar.innerHTML]=[iBar.innerHTML,largestBar.innerHTML];
+        await sleep(speed);
+        iBar.style.backgroundColor="#17a2b8";//original
+        leftBar.style.backgroundColor="#17a2b8";//original
+        rightBar.style.backgroundColor="#17a2b8";//original
+
+        await heapify(arr,length,largest);
     }
+    iBar.style.backgroundColor="#17a2b8";//original
+    if (left<length)
+    leftBar.style.backgroundColor="#17a2b8";//original
+    if (right<length)
+    rightBar.style.backgroundColor="#17a2b8";//original
 }
 
 //The main function that sorts the array.
-function heapSort(){
+async function heapSort(){
     bars.innerHTML="";
     let a_copy=[...a];
     for (let i=0;i<a_copy.length;i++){
@@ -620,13 +645,32 @@ function heapSort(){
     let i=Math.floor((length/2)-1);
     let j=length-1;
     while (i>=0){
-        heapify(a_copy,length,i);
+        await heapify(a_copy,length,i);
         i--;
     }
 
     while (j>=0){
+        let rootBar=document.querySelector(`.bar${0}`);
+        let jBar=document.querySelector(`.bar${j}`);
+        chosen.style.color="black";
+        chosen.innerHTML=`Deleting the first element...`;
+        await sleep(speed+200);
+        chosen.innerHTML=`And replacing it with element at index ${j}...`;
+        rootBar.style.backgroundColor="#f64c72";//checking
+        jBar.style.backgroundColor="#f64c72";//checking
         [a_copy[0],a_copy[j]]=[a_copy[j],a_copy[0]];
-        heapify(a_copy,j,0);
+        [rootBar.style.height,jBar.style.height]=[jBar.style.height,rootBar.style.height];
+        [rootBar.innerHTML,jBar.innerHTML]=[jBar.innerHTML,rootBar.innerHTML];
+        await sleep(speed+200);
+        rootBar.style.backgroundColor="#17a2b8";//original
+        jBar.style.backgroundColor="#5cdb95";//sorted
+        await heapify(a_copy,j,0);
         j--;
     }
+    for (let i=0;i<a_copy.length;i++){
+        let bar=document.querySelector(`.bar${i}`);
+        bar.style.backgroundColor="#5cdb95";//sorted
+    }
+    chosen.style.color="black";
+    chosen.innerHTML=`SORTED!!`;
 }
