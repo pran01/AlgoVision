@@ -18,15 +18,15 @@
     <div class="container sorting-algos text-center">
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo1" value="Insertion">
-            <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal" data-target=""><b> Insertion</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal" data-target="#InsertionModal"><b> Insertion</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo2" value="Selection">
-            <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target=""><b> Selection</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target="#SelectionModal"><b> Selection</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo3" value="Bubble">
-            <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target=""><b> Bubble</b></a></u></label>
+            <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target="#BubbleModal"><b> Bubble</b></a></u></label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo4" value="MergeIttr">
@@ -77,6 +77,154 @@
     <button class="btn btn-info btn-lg" id="resetBtn"><span class="fas fa-redo"></span> Reset Array</button>
     </div>
 </div>
+
+
+<!--InsertionModal-->
+<div class="modal fade" id="InsertionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Insertion Sort</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*The array is virtually split into a 
+sorted and an unsorted part. 
+Values from the unsorted part are picked,
+and inserted at the correct position 
+in the sorted part.
+<b style="font-size:larger;">Code: </b>
+function insertionSort(arr){
+    let sorted=[...arr];
+    let n=sorted.length;
+    for(let i=1;i&lt;n;i++){
+        <span style="color: gray;">//selecting the elements 
+        //starting from the 1st one.</span>
+        let key=sorted[i];
+        let j=i-1;
+        while(j>=0 && sorted[j]>key){
+            <span style="color: gray;">//shifting all element greater than the key,
+           //to the right by one index.</span>
+            sorted[j+1]=sorted[j];
+            j-=1;
+        }
+        <span style="color: gray;">//inserting the key at its place.</span>
+        sorted[j+1]=key;
+    }
+    return sorted;
+}
+        </pre>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/insertion-sort/">More Info</a>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--SelectionModal-->
+<div class="modal fade" id="SelectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Selection Sort</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*The selection sort algorithm sorts an array 
+by repeatedly finding the minimum element 
+(considering ascending order) 
+from unsorted part and putting it at the beginning.
+<b style="font-size:larger;">Code: </b>
+function selectionSort(arr){
+    const n=arr.length;
+    for (let i=0;i&lt;n;i++){
+        <span style="color: gray;">//[<--sorted--> i <--unsorted-->]</span>
+        let min=i;
+        <span style="color: gray;">//find the minimum number in the unsorted part.</span>
+        for(let j=i+1;j&lt;n;j++){
+            if (arr[j]&lt;arr[min])
+            min=j;
+        }
+        <span style="color: gray;">//swap the minimum value with the value at index i.</span>
+        let temp=arr[i];
+        arr[i]=arr[min];
+        arr[min]=temp;
+    }
+    <span style="color: gray;">//return the sorted array.</span>
+    return arr;
+}
+        </pre>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/selection-sort/">More Info</a>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<!--BubbleModal-->
+<div class="modal fade" id="BubbleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Bubble Sort</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+*simplest sorting algorithm.
+keeps swapping the adjacent elements if 
+they are in wrong order.
+Optimised Bubble sort:
+<b style="font-size:larger;">Code: </b>
+function bubbleSort(arr){
+    let n=arr.length;
+    for(let i=0;i&lt;n-1;i++){
+        let swapped=false;
+        for(let j=0;j&lt;n-1-i;j++){
+            <span style="color: gray;">//everytime the last element will
+           //become sorted. Hence, j&lt;n-1-i</span>
+            if(sorted[j]>sorted[j+1]){
+                <span style="color: gray;">//swap arr[j] and arr[j+1]</span>
+                let temp=sorted[j];
+                sorted[j]=sorted[j+1];
+                sorted[j+1]=temp;
+                swapped=true;
+            }
+        }
+        if(swapped==false){
+            <span style="color: gray;">//it means the array was already sorted.</span>
+            return sorted;
+        }
+    }
+    return sorted;
+}
+        </pre>
+        </div>
+        <div class="modal-footer">
+            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/bubble-sort/">More Info</a>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="{{url_for('static',filename='js/sorting.js')}}"></script>
 {% endblock %}
