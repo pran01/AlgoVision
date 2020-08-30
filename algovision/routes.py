@@ -14,3 +14,8 @@ def searching():
 @app.route('/sorting',methods=['GET','POST'])
 def sorting():
     return render_template('sorting.html')
+
+
+@app.route('/pathfinding',methods=['GET','POST'])
+def pathfinding():
+    return render_template('pathfinding.html')
