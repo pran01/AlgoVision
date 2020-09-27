@@ -32,18 +32,18 @@
       </button>
     </form>
   </nav>
-  <div class="container searching-algos text-center">
+  <div class="container pathfinding-algos text-center">
     <div class="form-check form-check-inline">
       <input
         class="form-check-input"
         type="radio"
-        name="SearchAlgos"
-        id="searchAlgo1"
-        value="Sequential"
+        name="PathAlgos"
+        id="pathAlgo1"
+        value="Djikstra"
       />
       <label class="form-check-label" for="inlineRadio1"
         ><u
-          ><a data-toggle="modal" data-target="#SequentialModal">Dijkstra</a></u
+          ><a data-toggle="modal" data-target="#DjikstraModal">Djikstra</a></u
         ></label
       >
     </div>
@@ -51,27 +51,57 @@
       <input
         class="form-check-input"
         type="radio"
-        name="SearchAlgos"
-        id="searchAlgo2"
-        value="Binary"
+        name="PathAlgos"
+        id="pathAlgo2"
+        value="A*"
       />
       <label class="form-check-label" for="inlineRadio2"
-        ><u><a data-toggle="modal" data-target="#BinaryModal">A*</a></u></label
+        ><u><a data-toggle="modal" data-target="#A*Modal">A*</a></u></label
       >
     </div>
     <div class="form-check form-check-inline">
       <input
         class="form-check-input"
         type="radio"
-        name="SearchAlgos"
-        id="searchAlgo3"
-        value="Interpolation"
+        name="PathAlgos"
+        id="pathAlgo3"
+        value="bfs"
       />
       <label class="form-check-label" for="inlineRadio3"
         ><u
-          ><a data-toggle="modal" data-target="#InterpolationModal"
-            >Blah Blah</a
+          ><a data-toggle="modal" data-target="#BFSModal"
+            >Bredth-first search</a
           ></u
+        ></label
+      >
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="PathAlgos"
+        id="pathAlgo4"
+        value="dfs"
+      />
+      <label class="form-check-label" for="inlineRadio4"
+        ><u
+          ><a data-toggle="modal" data-target="#DFSModal"
+            >Depth-first search</a
+          ></u
+        ></label
+      >
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="PathAlgos"
+        id="pathAlgo5"
+        value="swarm"
+      />
+      <label class="form-check-label" for="inlineRadio5"
+        ><u
+          ><a data-toggle="modal" data-target="#SwarmModal">Swarm</a></u
         ></label
       >
     </div>
@@ -79,47 +109,63 @@
   <div class="container search-parameters">
     <form>
       <div class="form-group">
-        <label class="text-center" for="ToSearch" id="ToSearchLabel">
-          <b>Enter a number to search.(Optional)</b><br />
-          <span id="ToSearchRange"
-            >(The number should be in the range: [1,39] )</span
-          ><br />
-          <span style="font-size: 0.8em"
-            >*If a number is not provided, we will select a random number from
-            the range</span
-          >
+        <label class="text-center w-100" id="pathSpeedLabel">
+          <b>Speed</b><br />
         </label>
         <input
-          type="text"
-          class="form-control text-center"
-          id="ToSearch"
-          placeholder="Enter here"
+          type="range"
+          min="1"
+          max="500"
+          value="485"
+          class="slider"
+          id="pathSpeed"
         />
       </div>
+      <hr style="width: 100%; background: white" />
+      <label class="text-center w-100" id="pathSpeedLabel">
+        <b>Themes</b><br />
+      </label>
+      <button
+        type="button"
+        class="btn btn-info changeThemeBtn"
+        id="changeThemeDefault"
+      >
+        Default</button
+      ><br />
+      <button
+        type="button"
+        class="btn btn-info changeThemeBtn"
+        id="changeThemeDragonball"
+      ></button
+      ><br />
+      <button
+        type="button"
+        class="btn btn-info changeThemeBtn"
+        id="changeThemeThor"
+      ></button
+      ><br />
+      <button
+        type="button"
+        class="btn btn-info changeThemeBtn"
+        id="changeThemeMinecraft"
+      ></button
+      ><br />
     </form>
   </div>
   <div class="container colors text-center">
-    <h4>Colors</h4>
-    <span class="fas fa-paint-brush color-brush" style="color: #3500d3"></span
-    ><span class="color-item"
-      ><span class="color-item-label"
-        >Upper/lower range for Binary and InterpolationSearch.</span
-      ></span
-    ><br />
+    <h4><u>Info</u></h4>
+    <br />
+    <div class="info-div" id="sourceDiv"></div>
+    <span class="info-label">Source</span><br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #f64c72"></span
-    ><span class="color-item"
-      ><span class="color-item-label">Checking</span></span
-    ><br />
+    <div class="info-div" id="pathDiv"></div>
+    <span class="info-label">Path</span><br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #d80702"></span
-    ><span class="color-item"
-      ><span class="color-item-label">Wrong one</span></span
-    ><br />
+    <div class="info-div" id="wallDiv"></div>
+    <span class="info-label">Wall</span><br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #5cdb95"></span
-    ><span class="color-item"><span class="color-item-label">Found</span></span
-    ><br />
+    <div class="info-div" id="goalDiv"></div>
+    <span class="info-label">Goal</span><br />
   </div>
   <div class="container boxes text-center"></div>
   <div id="tag" class="text-center w-100"></div>
@@ -140,10 +186,14 @@
     >
       Wall Patterns
     </button>
-    <div class="dropdown-menu">
-      <a type="button" onclick="drawWallPreset(wallPreset1)"> Pattern 1</a>
+    <div class="dropdown-menu text-center">
+      <a class="w-100" type="button" onclick="drawWallPreset(wallPreset1)">
+        Pattern 1</a
+      >
       <div class="dropdown-divider"></div>
-      <a type="button" onclick="drawWallPreset(wallPreset2)"> Pattern 2</a>
+      <a class="w-100" type="button" onclick="drawWallPreset(wallPreset2)">
+        Pattern 2</a
+      >
     </div>
   </div>
 </div>

@@ -82,14 +82,6 @@ a {
 .color-brush {
   font-size: 1.5em;
 }
-/* .color-item{
-    height: 5em;
-    width: 10em;
-    margin:0;
-    margin-left: 2em;
-    margin-top: 0.5em;
-    padding: 0.1em;
-} */
 
 .color-item-label {
   font-size: 0.8em;
@@ -155,13 +147,13 @@ a {
 .boxes {
   display: grid;
   width: 705px;
-  height: 420px;
+  height: 410px;
   grid-template-columns: repeat(25, 25px);
   grid-template-rows: repeat(15, 25px);
   gap: 1px;
   border-top: 3px white solid;
   border-bottom: 3px white solid;
-  margin-top: 0.1em;
+  margin-top: 0.3em;
   padding: 0;
   padding-left: 2em;
   padding-top: 0.4em;
@@ -188,4 +180,49 @@ a {
   float: left;
   margin-left: 8em;
   margin-top: 0.3em;
+}
+
+.changeThemeBtn {
+  width: 180px;
+  height: 35px;
+  margin-bottom: 0.3em;
+}
+
+#changeThemeDragonball {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/DragonBallBtn.png");
+}
+
+#changeThemeMinecraft {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/MinecraftBtn.png");
+}
+
+#changeThemeThor {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/ThorBtn.png");
+}
+
+.info-div {
+  display: flex;
+  float: left;
+  background-size: 25px 25px;
+  width: 30px;
+  height: 30px;
+  margin-left: 3em;
+  background-color: #17a2b8;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.pathfinding-algos {
+  border: 2px white double;
+  margin-top: 0.5em;
+  border-radius: 50px;
+  width: 60em;
+  height: 2em;
 }

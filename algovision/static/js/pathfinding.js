@@ -4,6 +4,22 @@ let resetbtn = document.querySelector("#resetbtn");
 let wall = new Map();
 let tag = document.querySelector("#tag");
 
+let slider = document.querySelector("#pathSpeed");
+let speed = 500 - (slider.value - 1);
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function () {
+  speed = 500 - (this.value - 1);
+};
+
+function getAlgo(name) {
+  let group = document.getElementsByName(name);
+  for (let i = 0; i < group.length; i++) {
+    if (group[i].checked) return group[i].value;
+  }
+  return null;
+}
+
 let wallPreset1 = [
   1,
   2,
@@ -313,7 +329,6 @@ let wallPreset2 = [
   198,
 ];
 
-let speed = 10;
 let sourceSelected = false,
   goalSelected = false;
 
@@ -354,11 +369,47 @@ let Thor = {
   fontSize: "20px",
 };
 
-let Theme = Minecraft;
+let Dragonball = {
+  Source: "Source-Dragonball2.png",
+  Goal: "Goal-Dragonball.png",
+  Wall: "Wall-Dragonball.png",
+  Path: "Path-DragonBall.gif",
+  Tag:
+    "Watch as the Goku tries to find the shortest path to Dragon balls being blocked by Red Ribbon Army.",
+  fontFamily: "'Electrolize', sans-serif",
+  fontSize: "20px",
+};
 
-tag.innerHTML = Theme.Tag;
-tag.style.fontFamily = Theme.fontFamily;
-tag.style.fontSize = Theme.fontSize;
+let Theme = Default;
+
+document
+  .querySelector("#changeThemeDragonball")
+  .addEventListener("click", () => {
+    Theme = Dragonball;
+    boxes.innerHTML = "";
+    drawBoard();
+    g = newGraph();
+  });
+document
+  .querySelector("#changeThemeMinecraft")
+  .addEventListener("click", () => {
+    Theme = Minecraft;
+    boxes.innerHTML = "";
+    drawBoard();
+    g = newGraph();
+  });
+document.querySelector("#changeThemeThor").addEventListener("click", () => {
+  Theme = Thor;
+  boxes.innerHTML = "";
+  drawBoard();
+  g = newGraph();
+});
+document.querySelector("#changeThemeDefault").addEventListener("click", () => {
+  Theme = Default;
+  boxes.innerHTML = "";
+  drawBoard();
+  g = newGraph();
+});
 
 function drawBoard() {
   for (let i = 1; i <= 375; i++) {
@@ -370,13 +421,36 @@ function drawBoard() {
     boxes.appendChild(box);
     wall.set(i + "", false);
   }
+  let sourceDiv = document.querySelector(`#sourceDiv`);
+  let wallDiv = document.querySelector("#wallDiv");
+  let goalDiv = document.querySelector("#goalDiv");
+  let pathDiv = document.querySelector("#pathDiv");
+
+  sourceDiv.style.backgroundImage =
+    "url('/static/images/" + Theme.Source + "')";
+
+  wallDiv.style.backgroundImage = "url('/static/images/" + Theme.Wall + "')";
+
+  goalDiv.style.backgroundImage = "url('/static/images/" + Theme.Goal + "')";
+
+  pathDiv.style.backgroundImage = "url('/static/images/" + Theme.Path + "')";
+
   let sBox = document.querySelector(`.box${source}`);
   let dBox = document.querySelector(`.box${dest}`);
   sBox.style.backgroundImage = "url('/static/images/" + Theme.Source + "')";
   dBox.style.backgroundImage = "url('/static/images/" + Theme.Goal + "')";
   let nodes = document.querySelectorAll(`.node`);
   nodes.forEach((item) => {
-    item.addEventListener("mouseup", function stopMovingSource(event) {
+    item.addEventListener("mouseup", function stopMoving(event) {
+      if (wall.get(event.target.classList[0].slice(3))) {
+        let i = parseInt(event.target.classList[0].slice(3));
+        g.addVertex(`${i}`);
+        if (i % 25 != 1) g.addEdge(i + "", i - 1 + "", 1);
+        if (i % 25 != 0) g.addEdge(i + "", i + 1 + "", 1);
+        if (i > 25) g.addEdge(i + "", i - 25 + "", 1);
+        if (i < 351) g.addEdge(i + "", i + 25 + "", 1);
+        wall.set(event.target.classList[0].slice(3), false);
+      }
       if (sourceSelected == true) {
         source = event.target.classList[0].slice(3);
         sourceSelected = false;
@@ -388,8 +462,16 @@ function drawBoard() {
     });
     item.addEventListener("mouseout", function removeSource(event) {
       if (sourceSelected == true) {
-        event.target.style.background = "#17a2b8"; //original
         if (event.target.classList[0].slice(3) == source) {
+          if (wall.get(event.target.classList[0].slice(3))) {
+            event.target.style.backgroundSize = `25px 25px`;
+            event.target.style.backgroundImage =
+              "url('/static/images/" + Theme.Wall + "')";
+            g.removeVertex(event.target.classList[0].slice(3) + "");
+          } else {
+            event.target.style.background = "#17a2b8"; //original
+          }
+
           nodes.forEach((item) => {
             if (
               item.style.backgroundImage ==
@@ -415,8 +497,15 @@ function drawBoard() {
           if (i < 351) g.addEdge(i + "", i + 25 + "", 1);
         }
       } else if (goalSelected == true) {
-        event.target.style.background = "#17a2b8"; //original
         if (event.target.classList[0].slice(3) == dest) {
+          if (wall.get(event.target.classList[0].slice(3))) {
+            event.target.style.backgroundSize = `25px 25px`;
+            event.target.style.backgroundImage =
+              "url('/static/images/" + Theme.Wall + "')";
+            g.removeVertex(event.target.classList[0].slice(3) + "");
+          } else {
+            event.target.style.background = "#17a2b8"; //original
+          }
           nodes.forEach((item) => {
             if (
               item.style.backgroundImage ==
@@ -499,7 +588,7 @@ function drawBoard() {
         wall.set(event.target.classList[0].slice(3), false);
       } else {
         if (
-          event.target.classList[0].slice(3) != source ||
+          event.target.classList[0].slice(3) != source &&
           event.target.classList[0].slice(3) != dest
         ) {
           event.target.style.backgroundSize = `1px 1px`;
@@ -518,6 +607,9 @@ function drawBoard() {
       }
     });
   });
+  tag.innerHTML = Theme.Tag;
+  tag.style.fontFamily = Theme.fontFamily;
+  tag.style.fontSize = Theme.fontSize;
 }
 
 drawBoard();
@@ -698,44 +790,68 @@ class Graph {
       console.log(`${key} ==> ${destsList}`);
     }
   }
-  bfs(start) {
+  bfs(start, dest) {
     let visited = new Map();
+    let visitedNodes = new Queue();
+    let parent = new Map();
     for (let vertex of this.adjList.keys()) {
       visited.set(vertex["node"], false);
     }
     let q = new Queue();
     visited.set(start, true);
+    visitedNodes.enqueue(start);
     q.enqueue(start);
     while (!q.isEmpty()) {
       let vertex = q.dequeue();
-      console.log(vertex);
+      if (vertex == dest) break;
       let dests = this.adjList.get(vertex);
       for (let i in dests) {
         let dest = dests[i];
         if (!visited.get(dest["node"])) {
           visited.set(dest["node"], true);
+          visitedNodes.enqueue(dest["node"]);
+          parent.set(dest["node"], vertex);
           q.enqueue(dest["node"]);
         }
       }
     }
+    let path = new Stack();
+    let child = parent.get(dest);
+    while (child != start && child != undefined) {
+      path.push(child);
+      child = parent.get(child);
+    }
+    return [path, visitedNodes];
   }
 
-  dfs(start) {
+  dfs(start, goal) {
     let visited = new Map();
+    let visitedNodes = new Queue();
+    let parent = new Map();
     for (let vertex of this.adjList.keys()) {
       visited.set(vertex["node"], false);
     }
     visited.set(start, true);
-    this.dfsUtil(start, visited);
+    this.dfsUtil(start, goal, visited, visitedNodes, parent);
+    let path = new Stack();
+    let child = parent.get(goal);
+    while (child != start && child != undefined) {
+      path.push(child);
+      child = parent.get(child);
+    }
+    return [path, visitedNodes];
   }
-  dfsUtil(start, visited) {
-    console.log(start);
+  dfsUtil(start, goal, visited, visitedNodes, parent) {
+    if (start == goal) return;
+    visitedNodes.enqueue(start);
     let dests = this.adjList.get(start);
     for (let i in dests) {
       let dest = dests[i];
       if (!visited.get(dest["node"])) {
         visited.set(dest["node"], true);
-        this.dfsUtil(dest["node"], visited);
+        parent.set(dest["node"], start);
+        if (dest["node"] == goal) return;
+        this.dfsUtil(dest["node"], goal, visited, visitedNodes, parent);
       }
     }
   }
@@ -825,7 +941,12 @@ findbtn.addEventListener("click", async function findPath() {
       item.style.background = "#17a2b8"; //original
     }
   });
-  let [path, visited] = g.djikstraPathStack(source, dest);
+  let path, visited;
+  let Algo = getAlgo("PathAlgos");
+  if (Algo == "Djikstra") [path, visited] = g.djikstraPathStack(source, dest);
+  else if (Algo == "bfs") [path, visited] = g.bfs(source, dest);
+  else if (Algo == "dfs") [path, visited] = g.dfs(source, dest);
+  else if (Algo == null) alert("Please Choose an algorithm first.");
   while (!visited.isEmpty()) {
     let visitedBoxNum = visited.dequeue();
     if (visitedBoxNum != source && visitedBoxNum != dest) {
@@ -840,11 +961,15 @@ findbtn.addEventListener("click", async function findPath() {
     await sleep(25);
 
     let pathBox = document.querySelector(`.box${pathBoxNum}`);
-    while (pathBox.hasChildNodes()) {
-      pathBox.removeChild(pathBox.firstChild);
-    }
-    pathBox.style.backgroundSize = "25px 25px";
+
+    pathBox.style.backgroundSize = `1px 1px`;
+    pathBox.style.backgroundRepeat = "no-repeat";
+    pathBox.style.backgroundPosition = "center";
     pathBox.style.backgroundImage = "url('/static/images/" + Theme.Path + "')";
+    for (let i = 0; i <= 25; i += 2) {
+      pathBox.style.backgroundSize = `${i}px ${i}px`;
+      await sleep(1);
+    }
   }
 });
 
@@ -861,7 +986,7 @@ async function drawWallPreset(wallPreset) {
   for (let i of wallPreset) {
     iBox = document.querySelector(`.box${i}`);
     if (
-      iBox.classList[0].slice(3) != source ||
+      iBox.classList[0].slice(3) != source &&
       iBox.classList[0].slice(3) != dest
     ) {
       iBox.style.backgroundSize = `1px 1px`;
