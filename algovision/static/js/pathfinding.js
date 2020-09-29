@@ -342,7 +342,7 @@ let Default = {
   Wall: "Wall-Default.png",
   Path: "Path-Default2.gif",
   Tag:
-    "Watch as the car tries to find the shortest path to the goal being blocked by wall.",
+    "Watch as the car tries to find the path to the goal being blocked by wall.",
   fontFamily: "'Staatliches', cursive",
   fontSize: "20px",
 };
@@ -353,7 +353,7 @@ let Minecraft = {
   Wall: "Wall-Minecraft.gif",
   Path: "Path-Minecraft.gif",
   Tag:
-    "Watch as the Zombie tries to find the shortest path to Steve being blocked by lava.",
+    "Watch as the Zombie tries to find the path to Steve being blocked by lava.",
   fontFamily: "'Press Start 2P','cursive'",
   fontSize: "10px",
 };
@@ -364,7 +364,7 @@ let Thor = {
   Wall: "Wall-Thor.png",
   Path: "Thunder2.gif",
   Tag:
-    "Watch as the Mjölnir tries to find the shortest path to Thor being blocked by Captain America's shield.",
+    "Watch as the Mjölnir tries to find the path to Thor being blocked by Captain America's shield.",
   fontFamily: "'Electrolize', sans-serif",
   fontSize: "20px",
 };
@@ -375,7 +375,7 @@ let Dragonball = {
   Wall: "Wall-Dragonball.png",
   Path: "Path-DragonBall.gif",
   Tag:
-    "Watch as the Goku tries to find the shortest path to Dragon balls being blocked by Red Ribbon Army.",
+    "Watch as the Goku tries to find the path to Dragon balls being blocked by Red Ribbon Army.",
   fontFamily: "'Electrolize', sans-serif",
   fontSize: "20px",
 };
@@ -866,8 +866,8 @@ class Graph {
     }
     return node;
   }
-  djikstraPathStack(s, d) {
-    let sp = new Map();
+  dijkstraPathStack(s, d) {
+    let sp = new Map(); //stores if vertex is in shortest path or not.
     let dist = new Map();
     let parent = new Map();
     let visited = new Queue();
@@ -909,6 +909,135 @@ class Graph {
     }
     return [path, visited];
   }
+  getMinOpenNode(open, f) {
+    let minInd = 0;
+    let min = Infinity;
+    for (let i in open) {
+      let a = open[i];
+      if (f.get(a) < min && f.get(a) != Infinity) {
+        min = f.get(a);
+        minInd = i;
+      }
+    }
+    return [open[minInd], minInd];
+  }
+  manhattanDistance(from, to) {
+    //For a 25X15 grid where names of the node denote its position
+    from = parseInt(from);
+    to = parseInt(to);
+    let fromX = from % 25;
+    let toX = to % 25;
+    let fromY = 351 - (from - fromX + 1) / 25;
+    let toY = 351 - (to - toX + 1) / 25;
+    let h = Math.abs(fromX - toX) + Math.abs(fromY - toY);
+    return h;
+  }
+  aStarSearch(start, goal) {
+    let open = new Array(),
+      closed = new Array();
+    let f = new Map(),
+      g = new Map(),
+      h = new Map(),
+      parent = new Map();
+    let visited = new Queue();
+    for (let key of this.adjList.keys()) {
+      f.set(key, Infinity);
+      g.set(key, Infinity);
+      h.set(key, Infinity);
+    }
+    f.set(start, 0);
+    g.set(start, 0);
+    h.set(start, 0);
+
+    open.push(start);
+    while (open.length > 0) {
+      let [q, ind] = this.getMinOpenNode(open, f);
+      open.splice(ind, 1);
+      closed.push(q);
+      visited.enqueue(q);
+      let successors = this.adjList.get(q);
+      for (let successor of successors) {
+        if (successor["node"] == goal) {
+          parent.set(successor["node"], q);
+          let path = new Stack();
+          let child = parent.get(goal);
+          while (child != start && child != undefined) {
+            path.push(child);
+            child = parent.get(child);
+          }
+          return [path, visited];
+        } else if (!closed.includes(successor["node"])) {
+          let gNew = g.get(q) + this.getWeight(q, successor["node"]);
+          let hNew = this.manhattanDistance(successor["node"], goal);
+          let fNew = gNew + hNew;
+          if (
+            f.get(successor["node"]) == Infinity ||
+            f.get(successor["node"]) > fNew
+          ) {
+            open.push(successor["node"]);
+            f.set(successor["node"], fNew);
+            g.set(successor["node"], gNew);
+            h.set(successor["node"], hNew);
+            parent.set(successor["node"], q);
+          }
+        }
+      }
+    }
+  }
+  getMinOpenNodeGreedy(open, h) {
+    let minInd = 0;
+    let min = Infinity;
+    for (let i in open) {
+      let a = open[i];
+      if (h.get(a) < min && h.get(a) != Infinity) {
+        min = h.get(a);
+        minInd = i;
+      }
+    }
+    return [open[minInd], minInd];
+  }
+  greedyBestFirstSearch(start, goal) {
+    let open = new Array(),
+      closed = new Array();
+    let h = new Map(),
+      parent = new Map();
+    let visited = new Queue();
+    for (let key of this.adjList.keys()) {
+      h.set(key, Infinity);
+    }
+    h.set(start, 0);
+
+    open.push(start);
+    while (open.length > 0) {
+      let [q, ind] = this.getMinOpenNodeGreedy(open, h);
+      open.splice(ind, 1);
+      closed.push(q);
+      visited.enqueue(q);
+      let successors = this.adjList.get(q);
+      for (let successor of successors) {
+        if (successor["node"] == goal) {
+          parent.set(successor["node"], q);
+          let path = new Stack();
+          let child = parent.get(goal);
+          while (child != start && child != undefined) {
+            path.push(child);
+            child = parent.get(child);
+          }
+          return [path, visited];
+        } else if (!closed.includes(successor["node"])) {
+          let hNew = this.manhattanDistance(successor["node"], goal);
+          if (
+            h.get(successor["node"]) == Infinity ||
+            h.get(successor["node"]) > hNew
+          ) {
+            open.push(successor["node"]);
+            h.set(successor["node"], hNew);
+            parent.set(successor["node"], q);
+          }
+        }
+      }
+    }
+  }
 }
 
 function newGraph() {
@@ -943,9 +1072,12 @@ findbtn.addEventListener("click", async function findPath() {
   });
   let path, visited;
   let Algo = getAlgo("PathAlgos");
-  if (Algo == "Djikstra") [path, visited] = g.djikstraPathStack(source, dest);
+  if (Algo == "Dijkstra") [path, visited] = g.dijkstraPathStack(source, dest);
   else if (Algo == "bfs") [path, visited] = g.bfs(source, dest);
   else if (Algo == "dfs") [path, visited] = g.dfs(source, dest);
+  else if (Algo == "A*") [path, visited] = g.aStarSearch(source, dest);
+  else if (Algo == "greedy")
+    [path, visited] = g.greedyBestFirstSearch(source, dest);
   else if (Algo == null) alert("Please Choose an algorithm first.");
   while (!visited.isEmpty()) {
     let visitedBoxNum = visited.dequeue();

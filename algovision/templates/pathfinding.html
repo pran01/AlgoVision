@@ -39,11 +39,13 @@
         type="radio"
         name="PathAlgos"
         id="pathAlgo1"
-        value="Djikstra"
+        value="Dijkstra"
       />
       <label class="form-check-label" for="inlineRadio1"
         ><u
-          ><a data-toggle="modal" data-target="#DjikstraModal">Djikstra</a></u
+          ><a data-toggle="modal" data-target="#DijkstraModal"
+            ><b>Dijkstra</b> (Shortest path)</a
+          ></u
         ></label
       >
     </div>
@@ -56,7 +58,11 @@
         value="A*"
       />
       <label class="form-check-label" for="inlineRadio2"
-        ><u><a data-toggle="modal" data-target="#A*Modal">A*</a></u></label
+        ><u
+          ><a data-toggle="modal" data-target="#A*Modal"
+            ><b>A*</b> (Shortest path)</a
+          ></u
+        ></label
       >
     </div>
     <div class="form-check form-check-inline">
@@ -70,7 +76,7 @@
       <label class="form-check-label" for="inlineRadio3"
         ><u
           ><a data-toggle="modal" data-target="#BFSModal"
-            >Bredth-first search</a
+            ><b>Bredth-first search</b> (Shortest Path)</a
           ></u
         ></label
       >
@@ -86,7 +92,7 @@
       <label class="form-check-label" for="inlineRadio4"
         ><u
           ><a data-toggle="modal" data-target="#DFSModal"
-            >Depth-first search</a
+            ><b>Depth-first search</b> (shortest not guaranteed)</a
           ></u
         ></label
       >
@@ -97,11 +103,13 @@
         type="radio"
         name="PathAlgos"
         id="pathAlgo5"
-        value="swarm"
+        value="greedy"
       />
       <label class="form-check-label" for="inlineRadio5"
         ><u
-          ><a data-toggle="modal" data-target="#SwarmModal">Swarm</a></u
+          ><a data-toggle="modal" data-target="#BestFirstModal">
+            <b>Greedy Best-First</b> (shortest not guaranteed)</a
+          ></u
         ></label
       >
     </div>
