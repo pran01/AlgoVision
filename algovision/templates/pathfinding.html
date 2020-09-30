@@ -59,7 +59,7 @@
       />
       <label class="form-check-label" for="inlineRadio2"
         ><u
-          ><a data-toggle="modal" data-target="#A*Modal"
+          ><a data-toggle="modal" data-target="#AStarModal"
             ><b>A*</b> (Shortest path)</a
           ></u
         ></label
@@ -206,72 +206,20 @@
   </div>
 </div>
 
-<!--SequentialSearchModal-->
-<div
-  class="modal fade"
-  id="SequentialModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">
-          Sequential Search
-        </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <pre>
-            <b>Language:</b> Javascript
-            <b style="font-size:larger;">Code: </b>
-            function sequentialSearch(arr,x){
-                let n=arr.length;
-                //check every element linearly
-                for (i=0;i&lt;n;i++){
-                    if(arr[i]==x)
-                    return i;
-                }
-                return -1;
-            }
-        </pre>
-      </div>
-      <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/linear-search/"
-          >More Info</a
-        >
-        <button class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!--DijkstraModal-->
 <div
   class="modal fade"
-  id="BinaryModal"
+  id="DijkstraModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalScrollableTitle"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
-          Binary Search
+          Dijkstra's Algorithm
         </h5>
         <button
           type="button"
@@ -284,43 +232,89 @@
       </div>
       <div class="modal-body">
         <pre>
-<b style="font-size:larger;">Language:</b> <b>Javascript</b>
-<b style="font-size:larger;">Code: </b>
-function binarySearch(arr,x){
-    <span style="color: gray;">//Binary Search requires the array to be sorted.</span>
-    let n=arr.length-1;
-    let mid=Math.floor(n/2);
-    <span style="color: gray;">//we will try the recursive approach in this.</span>
-    if (n>=1){
-        if (arr[mid]==x){
-            <span style="color: gray;">//if the middle value if the required number,</span>
-            <span style="color: gray;">//return the middle index.</span>
-            return mid;
-        }
-        else if (arr[mid]&lt;x){
-            <span style="color: gray;">//if middle value is less than x,</span>
-            <span style="color: gray;">//we search the right side of the array.</span>
-            return binarySearch(arr.slice(mid+1,),x);
-        }
-        else if(arr[mid]>x){
-            <span style="color: gray;">//if middle value is more than x,</span>
-            <span style="color: gray;">//we search the left side of the array.</span>
-            return binarySearch(arr.slice(0,mid),x);
-        }
+  <b>Language:</b> Javascript
+  <b style="font-size:larger;">Code: </b>
+  <span style="color: gray;">//Function to get the node with minimum distance.</span>
+  getMinNode(sp, dist) {
+    let min = Infinity;
+    let node;
+    for (let i of dist.keys()) {
+      <span style="color: gray;">//for each of the vertices in distance array.</span>
+      if (sp.get(i) == false && dist.get(i) < min && dist.get(i) != Infinity) {
+        <span style="color: gray;">//if its not in the shortest path and its distance is less than minimum.</span>
+        min = dist.get(i);
+        node = i;
+      }
     }
-    else{
-        <span style="color: gray;">//if length of the array becomes 0,</span>
-        <span style="color: gray;">//x is not in array, we return -1.</span>
-        return -1;
+    <span style="color: gray;">//return the node which is not in shortest path and has a minimum distance.</span>
+    return node;
+  }
+  <span style="color: gray;">//The main function to call the Dijkstra's algorithm.</span>
+  djikstraPath(s, d) {
+    let sp = new Map(); <span style="color: gray;">//To store if a vertex is included in shortest path.</span>
+    let dist = new Map(); <span style="color: gray;">//To store the distance of each node from start.</span>
+    let parent = new Map(); <span style="color: gray;">//To store information of a parent of a node in shortest path.</span>
+    for (let key of this.adjList.keys()) {
+      <span style="color: gray;">//set the distance of start node 0</span>
+      if (key == s) dist.set(key, 0);
+      <span style="color: gray;">//and every other node as Infinity</span>
+      else dist.set(key, Infinity);
     }
-}
+    for (let key of this.adjList.keys()) {
+      sp.set(key, false);
+    }
+    <span style="color: gray;">//select the node which is not in shortest path and has minimum distance.</span>
+    let minNode = this.getMinNode(sp, dist);
+    if (minNode != undefined) {
+      while (minNode != undefined) {
+        <span style="color: gray;">//select the node which is not in shortest path and has minimum distance.</span>
+        minNode = this.getMinNode(sp, dist);
+        <span style="color: gray;">//include that node in the shortest path.</span>
+        sp.set(minNode, true);
+        let adjNodes = this.adjList.get(minNode);
+        for (let i in adjNodes) {
+          <span style="color: gray;">//for all adjacent nodes of that node,</span>
+          let adjNode = adjNodes[i];
+          if (
+            dist.get(minNode) + this.getWeight(minNode, adjNode["node"]) <
+            dist.get(adjNode["node"])
+          ) {
+            <span style="color: gray;">//if sum of distance value of u and weight of edge u-v,</span>
+            <span style="color: gray;">//is less than the distance value of v, then update the distance value of v.</span>
+            dist.set(
+              adjNode["node"],
+              dist.get(minNode) + this.getWeight(minNode, adjNode["node"])
+            );
+            <span style="color: gray;">//set the parent of that adjacent node as minNode.</span>
+            parent.set(adjNode["node"], minNode);
+          }
+        }
+        <span style="color: gray;">//if the minimum node is the goal, then break the loop</span>
+        if (minNode == d) break;
+      }
+    }
+    <span style="color: gray;">//For printing the path.</span>
+    let path = new Stack();
+    let child = d;
+    while (child != s && child != undefined) {
+      path.push(child);
+      child = parent.get(child);
+    }
+    path.push(s);
+    let pathPrint = "";
+    while (path.size() != 1) {
+      pathPrint += path.pop() + " ==> ";
+    }
+    pathPrint += path.pop();
+    console.log(pathPrint);
+  }
         </pre>
       </div>
       <div class="modal-footer">
         <a
           type="button"
           class="btn btn-info"
-          href="https://www.geeksforgeeks.org/binary-search/"
+          href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/"
           >More Info</a
         >
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -329,20 +323,154 @@ function binarySearch(arr,x){
   </div>
 </div>
 
-<!--InterPolationModal-->
+<!--AstarModal-->
 <div
   class="modal fade"
-  id="InterpolationModal"
+  id="AStarModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalScrollableTitle"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">A* Search</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre>
+<b style="font-size:larger;">Language:</b> <b>Javascript</b>
+<b style="font-size:larger;">Code: </b>
+<span style="color: gray;">//Function to get the node in the open list
+  //having minimum value of f.</span>
+  getMinOpenNode(open, f) {
+    let minInd = 0;
+    let min = Infinity;
+    for (let i in open) {
+      let a = open[i];
+      if (f.get(a) < min && f.get(a) != Infinity) {
+        min = f.get(a);
+        minInd = i;
+      }
+    }
+    <span style="color: gray;">//return the node and the index of that node.</span>
+    return [open[minInd], minInd];
+  }
+  <span style="color: gray;">//Function to calculate manhattan distance for our heuristic.</span>
+  manhattanDistance(from, to) {
+    <span style="color: gray;">//For a 25X15 grid where names of the node denote its position</span>
+    from = parseInt(from); <span style="color: gray;">//converting to integer.</span>
+    to = parseInt(to);
+    let fromX = from % 25;
+    let toX = to % 25;
+    let fromY = 351 - (from - fromX + 1) / 25;
+    let toY = 351 - (to - toX + 1) / 25;
+    let h = Math.abs(fromX - toX) + Math.abs(fromY - toY);
+    return h;
+  }
+  <span style="color: gray;">//The main function to perform A* search on the graph.</span>
+  aStarSearch(start, goal) {
+    <span style="color: gray;">//Formula: f(n)=g(n)+h(n)</span>
+    let open = new Array(),
+      closed = new Array();
+    let f = new Map(),
+      g = new Map(), <span style="color: gray;">//Distance between start and that node</span>
+      h = new Map(), <span style="color: gray;">//approx. distance between that node and goal.</span>
+      parent = new Map(); <span style="color: gray;">//To store information of parent.</span>
+    for (let key of this.adjList.keys()) {
+      <span style="color: gray;">//set f, g, and h as infinity for all</span>
+      f.set(key, Infinity);
+      g.set(key, Infinity);
+      h.set(key, Infinity);
+    }
+    <span style="color: gray;">//set f,g,and h 0 for start node.</span>
+    f.set(start, 0);
+    g.set(start, 0);
+    h.set(start, 0);
+
+    <span style="color: gray;">//push the start node in open list.</span>
+    open.push(start);
+    while (open.length > 0) {
+      let [q, ind] = this.getMinOpenNode(open, f);
+      open.splice(ind, 1); <span style="color: gray;">//deleting the node with min f.</span>
+      closed.push(q); <span style="color: gray;">//pushing that node in closed list.</span>
+      let successors = this.adjList.get(q);
+      for (let successor of successors) {
+        <span style="color: gray;">//For all its successors,</span>
+        if (successor["node"] == goal) {
+          <span style="color: gray;">//if that successor is our final goal,</span>
+          <span style="color: gray;">//end the function.</span>
+          parent.set(successor["node"], q);
+          let path = new Stack();
+          let child = goal;
+          while (child != start && child != undefined) {
+            path.push(child);
+            child = parent.get(child);
+          }
+          path.push(start);
+          let pathPrint = "";
+          while (path.size() != 1) {
+            pathPrint += path.pop() + " ==> ";
+          }
+          pathPrint += path.pop();
+          console.log(pathPrint);
+          return;
+        } else if (!closed.includes(successor["node"])) {
+          <span style="color: gray;">//if the successor is not in closed list,</span>
+          let gNew = g.get(q) + this.getWeight(q, successor["node"]);
+          let hNew = this.manhattanDistance(successor["node"], goal);
+          let fNew = gNew + hNew;
+          if (
+            f.get(successor["node"]) == Infinity ||
+            f.get(successor["node"]) > fNew
+          ) {
+            open.push(successor["node"]);
+            f.set(successor["node"], fNew);
+            g.set(successor["node"], gNew);
+            h.set(successor["node"], hNew);
+            parent.set(successor["node"], q);
+          }
+        }
+      }
+    } 
+  }
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/a-search-algorithm/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--BFSModal-->
+<div
+  class="modal fade"
+  id="BFSModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
-          Interpolation Search
+          Bredth-first Search
         </h5>
         <button
           type="button"
@@ -356,43 +484,36 @@ function binarySearch(arr,x){
       <div class="modal-body">
         <pre>
 <b style="font-size:larger;">Language:</b> <b>Javascript</b>
-*An improvement over binary search for instances where,
-the values in a sorted array are uniformly distributed.
-Binary Search always goes to the middle element to check. 
-On the other hand, interpolation search may go to 
-different locations according to the value of the key being searched.
 <b style="font-size:larger;">Code: </b>
-function interpolationSearch(arr,x){
-    let lo=0,hi=(arr.length)-1;
-    <span style="color: gray;">//x has to be in the range [lo,hi]</span>
-    while ((lo<=hi)&&(x>=arr[lo])&&(x<=arr[hi])){
-        if(lo==hi){
-            <span style="color: gray;">//when lo=hi the array will contain only one value.</span>
-            if(arr[lo]==x)
-            <span style="color: gray;">//if that value is x, return the index.</span>
-                return lo;
-            else
-                return -1;
-        }
-        <span style="color: gray;">// The case: lo&lt;hi
-        // The idea of formula is to return higher value of pos
-        // when element to be searched is closer to arr[hi]. And
-        // smaller value when closer to arr[lo]</span>
-        let pos=lo + (((hi-lo)/(arr[hi]-arr[lo]))*(x - arr[lo]));
-        if(arr[pos]==x){
-            return pos;
-        }
-        else if (arr[pos]>x){
-            <span style="color: gray;">//if x is less than the value at probe, 
-            //we select pos from the left part.</span>
-            hi=pos-1;
-        }
-        else{
-            <span style="color: gray;">//if x is more than the value at probe, we select pos from the right part.</span>
-            lo=pos+1;
-        }
+bfs(start) {
+  let visited = new Map();<span style="color: gray;">//To store the information that if a vertex is visited.</span>
+  for (let vertex of this.adjList.keys()) {
+    <span style="color: gray;">//set all vertex as not visited.</span>
+    visited.set(vertex["node"], false);
+  }
+  let q = new Queue();
+  <span style="color: gray;">//set the start vertex as visited.</span>
+  visited.set(start, true);
+  <span style="color: gray;">//and enqueue that vertex.</span>
+  q.enqueue(start);
+  while (!q.isEmpty()) {
+    <span style="color: gray;">//get the vertex at the front of queue</span>
+    let vertex = q.dequeue();
+    <span style="color: gray;">//dequeue it and print that vertex.</span>
+    console.log(vertex);
+    let dests = this.adjList.get(vertex);
+    <span style="color: gray;">//for all the adjacent vertices of that vertex,</span>
+    for (let i in dests) {
+      let dest = dests[i];
+      <span style="color: gray;">//if its not in the visited array,</span>
+      if (!visited.get(dest["node"])) {
+        <span style="color: gray;">//insert it in the visited array</span>
+        visited.set(dest["node"], true);
+        <span style="color: gray;">//and enqueue that.</span>
+        q.enqueue(dest["node"]);
+      }
     }
-    return -1;
+  }
 }
         </pre>
       </div>
@@ -400,7 +521,191 @@ function interpolationSearch(arr,x){
         <a
           type="button"
           class="btn btn-info"
-          href="https://www.geeksforgeeks.org/interpolation-search/"
+          href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--DFSModal-->
+<div
+  class="modal fade"
+  id="DFSModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">
+          Depth First Search
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre>
+<b>Language:</b> Javascript
+<b style="font-size:larger;">Code: </b>
+<span style="color: gray;">//The main function that calls dfs.</span>
+dfs(start) {
+  <span style="color: gray;">/*Depth First Traversal for a graph is similar to Depth First Traversal of a tree.</span> 
+  The only catch here is, unlike trees, graphs may contain cycles, 
+  a node may be visited twice. To avoid processing a node more than once, 
+  use a boolean visited array.*/
+  let visited = new Map(); <span style="color: gray;">//we are using a map here instead of boolean array.</span>
+  for (let vertex of this.adjList.keys()) {
+    <span style="color: gray;">//for all the vertices, set  visited to false.</span>
+    visited.set(vertex["node"], false);
+  }
+  visited.set(start, true); <span style="color: gray;">x//set the start node as visited.</span>
+  this.dfsUtil(start, visited);
+}
+
+<span style="color: gray;">//The utility function for performing DFS.</span>
+dfsUtil(start, visited) {
+  console.log(start); <span style="color: gray;">//printing the start node.</span>
+  let dests = this.adjList.get(start); <span style="color: gray;">//get all its adjacent nodes.</span>
+  for (let i in dests) {
+    <span style="color: gray;">//for each of those adjacent nodes,</span>
+    let dest = dests[i];
+    if (!visited.get(dest["node"])) {
+      <span style="color: gray;">//if its not in the visited list</span>
+      visited.set(dest["node"], true); <span style="color: gray;">//insert it in visited list.</span>
+      this.dfsUtil(dest["node"], visited);
+      <span style="color: gray;">//recursively call the utility function, making
+      //the adjacent node the starting node.</span>
+    }
+  }
+}
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--BestFirstModal-->
+<div
+  class="modal fade"
+  id="BestFirstModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">
+          Greedy Best First Search
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre>
+<b>Language:</b> Javascript
+<b style="font-size:larger;">Code: </b>
+<span style="color: gray;">//For the node in the open list with minimum h</span>
+getMinOpenNodeGreedy(open, h) {
+  let minInd = 0;
+  let min = Infinity;
+  for (let i in open) {
+    let a = open[i];
+    if (h.get(a) < min && h.get(a) != Infinity) {
+      min = h.get(a);
+      minInd = i;
+    }
+  }
+  <span style="color: gray;">//return the node and the index of the node.</span>
+  return [open[minInd], minInd];
+}
+<span style="color: gray;">//The main function for performing greedy search.</span>
+greedyBestFirstSearch(start, goal) {
+  let open = new Array(),
+    closed = new Array();
+  let h = new Map(), <span style="color: gray;">//containing the approx. value of distance to goal.</span>
+    parent = new Map();
+  for (let key of this.adjList.keys()) {
+    <span style="color: gray;">//set heuristic measure for all nodes as Infinity.</span>
+    h.set(key, Infinity);
+  }
+  <span style="color: gray;">//set the heuristic for start node as 0.</span>
+  h.set(start, 0);
+  open.push(start); <span style="color: gray;">//push the start node in open list</span>
+  while (open.length > 0) {
+    let [q, ind] = this.getMinOpenNodeGreedy(open, h);
+    open.splice(ind, 1); <span style="color: gray;">//delete the min node from open list.</span>
+    <span style="color: gray;">//push the min node in closed list.</span>
+    closed.push(q);
+    let successors = this.adjList.get(q);
+    for (let successor of successors) {
+      <span style="color: gray;">//for all successors of that node,</span>
+      if (successor["node"] == goal) {
+        <span style="color: gray;">//if that successor is goal, end the function.</span>
+        parent.set(successor["node"], q);
+        let path = new Stack();
+        let child = goal;
+        while (child != start && child != undefined) {
+          path.push(child);
+          child = parent.get(child);
+        }
+        path.push(start);
+        let pathPrint = "";
+        while (path.size() != 1) {
+          pathPrint += path.pop() + " ==> ";
+        }
+        pathPrint += path.pop();
+        console.log(pathPrint);
+        return;
+      } else if (!closed.includes(successor["node"])) {
+        <span style="color: gray;">//if that successor is not included in closed list,</span>
+        let hNew = this.manhattanDistance(successor["node"], goal);
+        if (
+          h.get(successor["node"]) == Infinity ||
+          h.get(successor["node"]) > hNew
+        ) {
+          open.push(successor["node"]);
+          h.set(successor["node"], hNew);
+          parent.set(successor["node"], q);
+        }
+      }
+    }
+  }
+}
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/best-first-search-informed-search/"
           >More Info</a
         >
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
