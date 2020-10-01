@@ -1,79 +1,151 @@
-{% extends 'layout.html' %}
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 <title>Searching</title>
-{% endblock %}
-
-{% block body %}
-<div class="full-height" style="background: #0c0032; color: white;">
-    <nav class="navbar navbar-light" style="background: #17a2b8; height: 4em; color:white">
-        <a class="navbar-brand" href="{{url_for('home')}}">
-            <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
-            <span class="hide">Algo-Vision</span>
-        </a>
-        <form class="form-inline">
-            <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit" style="background:#0c0032">Search</button>
-        </form>
-    </nav>
-    <div class="container searching-algos text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="SearchAlgos" id="searchAlgo1" value="Sequential">
-            <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal" data-target="#SequentialModal">Sequential</a></u></label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="SearchAlgos" id="searchAlgo2" value="Binary">
-            <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target="#BinaryModal">Binary</a></u></label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="SearchAlgos" id="searchAlgo3" value="Interpolation">
-            <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target="#InterpolationModal">Interpolation</a></u></label>
-        </div>
+{% endblock %} {% block body %}
+<div class="full-height" style="background: #0c0032; color: white">
+  <nav
+    class="navbar navbar-light"
+    style="background: #17a2b8; height: 3.5em; color: white"
+  >
+    <a class="navbar-brand" href="{{url_for('home')}}">
+      <img
+        src="{{url_for('static',filename='images/code.png')}}"
+        width="35"
+        height="35"
+        alt="Algovision"
+        loading="lazy"
+      />
+      <span class="hide">Algo-Vision</span>
+    </a>
+  </nav>
+  <div class="container searching-algos text-center">
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="SearchAlgos"
+        id="searchAlgo1"
+        value="Sequential"
+      />
+      <label class="form-check-label" for="inlineRadio1"
+        ><u
+          ><a data-toggle="modal" data-target="#SequentialModal"
+            >Sequential</a
+          ></u
+        ></label
+      >
     </div>
-    <div class="container search-parameters">
-        <form>
-            <div class="form-group">
-                <label class="text-center" for="ToSearch" id="ToSearchLabel">
-                    <b>Enter a number to search.(Optional)</b><br>
-                    <span id="ToSearchRange">(The number should be in the range: [1,39] )</span><br>
-                    <span style="font-size: 0.8em;">*If a number is not provided, 
-                        we will select a random number from the range</span>
-                </label>
-                <input type="text" class="form-control text-center" id="ToSearch" placeholder="Enter here">
-            </div>
-        </form>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="SearchAlgos"
+        id="searchAlgo2"
+        value="Binary"
+      />
+      <label class="form-check-label" for="inlineRadio2"
+        ><u
+          ><a data-toggle="modal" data-target="#BinaryModal">Binary</a></u
+        ></label
+      >
     </div>
-    <div class="container colors text-center">
-        <h4>Colors</h4>
-        <span class="fas fa-paint-brush color-brush" style="color: #3500d3;"></span><span class="color-item"><span class="color-item-label">Upper/lower range for Binary and InterpolationSearch.</span></span><br>
-        <hr style="background: white;">
-        <span class="fas fa-paint-brush color-brush" style="color: #f64c72;"></span><span class="color-item"><span class="color-item-label">Checking</span></span><br>
-        <hr style="background: white;">
-        <span class="fas fa-paint-brush color-brush" style="color: #d80702;"></span><span class="color-item"><span class="color-item-label">Wrong one</span></span><br>
-        <hr style="background: white;">
-        <span class="fas fa-paint-brush color-brush" style="color: #5cdb95;"></span><span class="color-item"><span class="color-item-label">Found</span></span><br>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="SearchAlgos"
+        id="searchAlgo3"
+        value="Interpolation"
+      />
+      <label class="form-check-label" for="inlineRadio3"
+        ><u
+          ><a data-toggle="modal" data-target="#InterpolationModal"
+            >Interpolation</a
+          ></u
+        ></label
+      >
     </div>
-    <div class="container bars text-center">
-
-    </div>
-    <div class="text-center" id="search">
-    <button class="btn btn-info btn-lg" id="searchbtn"><span class="fas fa-search"></span> Search</button>
+  </div>
+  <div class="container search-parameters">
+    <form>
+      <div class="form-group">
+        <label class="text-center" for="ToSearch" id="ToSearchLabel">
+          <b>Enter a number to search.(Optional)</b><br />
+          <span id="ToSearchRange"
+            >(The number should be in the range: [1,39] )</span
+          ><br />
+          <span style="font-size: 0.8em"
+            >*If a number is not provided, we will select a random number from
+            the range</span
+          >
+        </label>
+        <input
+          type="text"
+          class="form-control text-center"
+          id="ToSearch"
+          placeholder="Enter here"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="container colors text-center">
+    <h4>Colors</h4>
+    <span class="fas fa-paint-brush color-brush" style="color: #3500d3"></span
+    ><span class="color-item"
+      ><span class="color-item-label"
+        >Upper/lower range for Binary and InterpolationSearch.</span
+      ></span
+    ><br />
+    <hr style="background: white" />
+    <span class="fas fa-paint-brush color-brush" style="color: #f64c72"></span
+    ><span class="color-item"
+      ><span class="color-item-label">Checking</span></span
+    ><br />
+    <hr style="background: white" />
+    <span class="fas fa-paint-brush color-brush" style="color: #d80702"></span
+    ><span class="color-item"
+      ><span class="color-item-label">Wrong one</span></span
+    ><br />
+    <hr style="background: white" />
+    <span class="fas fa-paint-brush color-brush" style="color: #5cdb95"></span
+    ><span class="color-item"><span class="color-item-label">Found</span></span
+    ><br />
+  </div>
+  <div class="container bars text-center"></div>
+  <div class="text-center" id="search">
+    <button class="btn btn-info btn-lg" id="searchbtn">
+      <span class="fas fa-search"></span> Search
+    </button>
     <div id="chosendiv">
-        <span id="chosen"></span>
+      <span id="chosen"></span>
     </div>
-    </div>
+  </div>
 </div>
 
 <!--SequentialSearchModal-->
-<div class="modal fade" id="SequentialModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalScrollableTitle">Sequential Search</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" >
+<div
+  class="modal fade"
+  id="SequentialModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">
+          Sequential Search
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <pre>
             <b>Language:</b> Javascript
             <b style="font-size:larger;">Code: </b>
@@ -87,27 +159,45 @@
                 return -1;
             }
         </pre>
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/linear-search/">More Info</a>
-            <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/linear-search/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
-
 <!--BinarySearchModal-->
-<div class="modal fade" id="BinaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalScrollableTitle">Binary Search</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" >
+<div
+  class="modal fade"
+  id="BinaryModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">
+          Binary Search
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <pre>
 <b style="font-size:larger;">Language:</b> <b>Javascript</b>
 <b style="font-size:larger;">Code: </b>
@@ -140,27 +230,45 @@ function binarySearch(arr,x){
     }
 }
         </pre>
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/binary-search/">More Info</a>
-            <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/binary-search/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
-
 <!--InterPolationModal-->
-<div class="modal fade" id="InterpolationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalScrollableTitle">Interpolation Search</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" >
+<div
+  class="modal fade"
+  id="InterpolationModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">
+          Interpolation Search
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <pre>
 <b style="font-size:larger;">Language:</b> <b>Javascript</b>
 *An improvement over binary search for instances where,
@@ -202,13 +310,18 @@ function interpolationSearch(arr,x){
     return -1;
 }
         </pre>
-        </div>
-        <div class="modal-footer">
-            <a type="button" class="btn btn-info" href="https://www.geeksforgeeks.org/interpolation-search/">More Info</a>
-            <button class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <a
+          type="button"
+          class="btn btn-info"
+          href="https://www.geeksforgeeks.org/interpolation-search/"
+          >More Info</a
+        >
+        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
 <script src="{{url_for('static',filename='js/searching.js')}}"></script>

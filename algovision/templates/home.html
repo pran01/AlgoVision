@@ -1,27 +1,44 @@
-{% extends 'layout.html' %}
-
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 <title>Home</title>
-{% endblock %}
-
-{% block body %}
-<div class="full-height" style="background: #0c0032; color:white"><!--#379683-->
-<nav class="navbar navbar-light" style="background: #17a2b8; height: 5em; color:white"><!--#5cdb95-->
+{% endblock %} {% block body %}
+<div class="full-height" style="background: #0c0032; color: white">
+  <!--#379683-->
+  <nav
+    class="navbar navbar-light"
+    style="background: #17a2b8; height: 5em; color: white"
+  >
+    <!--#5cdb95-->
     <a class="navbar-brand" href="{{url_for('home')}}">
-        <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision" loading="lazy">
-        <span class="hide">Algo-Vision</span>
+      <img
+        src="{{url_for('static',filename='images/code.png')}}"
+        width="35"
+        height="35"
+        alt="Algovision"
+        loading="lazy"
+      />
+      <span class="hide">Algo-Vision</span>
     </a>
-    <form class="form-inline">
-      <input class="form-control mr-2" type="search" placeholder="Search for Algorithms" aria-label="Search">
-      <button class="btn btn-info my-2 my-sm-0" type="submit" style="background:#0c0032">Search</button>
-    </form>
-</nav>
-<h1 class="text-center" style="margin-top: 10%;">Type of Algorithm</h1>
-<div class="container" style="margin-top: 2em; padding: 2em;">
-    <a type="button" class=" btn btn-info btn-lg col-3 home-buttons" href="{{url_for('searching')}}"><b>Searching</b></a>
-    <a type="button" class=" btn btn-info btn-lg col-3 home-buttons" href="{{url_for('sorting')}}"><b>Sorting</b></a>
-    <a type="button" class=" btn btn-info btn-lg col-3 home-buttons" href="{{url_for('pathfinding')}}"><b>Path Finder</b></a>
-</div>
-
+  </nav>
+  <h1 class="text-center" style="margin-top: 10%">Type of Algorithm</h1>
+  <div class="container" style="margin-top: 2em; padding: 2em">
+    <a
+      type="button"
+      class="btn btn-info btn-lg col-3 home-buttons"
+      href="{{url_for('searching')}}"
+      ><b>Searching</b></a
+    >
+    <a
+      type="button"
+      class="btn btn-info btn-lg col-3 home-buttons"
+      href="{{url_for('sorting')}}"
+      ><b>Sorting</b></a
+    >
+    <a
+      type="button"
+      class="btn btn-info btn-lg col-3 home-buttons"
+      href="{{url_for('pathfinding')}}"
+      ><b>Path Finder</b></a
+    >
+  </div>
 </div>
 {% endblock %}

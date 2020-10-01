@@ -1,152 +1,228 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Source Code Pro', monospace;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Source Code Pro", monospace;
 }
-html,body{
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
-.full-height{
-    height: 100%;
+.full-height {
+  height: 100%;
 }
 
 @media (max-width: 600px) {
-    .hide {
-        display:none;
-    }
+  .hide {
+    display: none;
+  }
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.home-buttons{
-    color: black; 
-    margin-left: 3em;
+.home-buttons {
+  color: black;
+  margin-left: 3em;
 }
 
-.home-buttons:hover{
-    margin-top:0.5%;
-    box-shadow:5px 5px 0px white;
+.home-buttons:hover {
+  margin-top: 0.5%;
+  box-shadow: 5px 5px 0px white;
 }
 
-.bars{
-    border-top: 3px white solid;
-    border-bottom: 3px white solid;
-    width: 50em;
-    height: 25em;
-    margin-top: 1em;
-    padding: 0;
-    padding-left: 0.5em;
-    margin-left: 15em;
+.bars {
+  border-top: 3px white solid;
+  border-bottom: 3px white solid;
+  width: 50em;
+  height: 25em;
+  margin-top: 1em;
+  padding: 0;
+  padding-left: 0.5em;
+  margin-left: 15em;
 }
 
-.searching-algos{
-    border: 2px white double;
-    margin-top: 0.5em;
-    border-radius: 50px;
-    width: 50em;
-    height: 2em;
+.searching-algos {
+  border: 2px white double;
+  margin-top: 0.5em;
+  border-radius: 50px;
+  width: 50em;
+  height: 2em;
 }
 
-.form-check{
-    margin: 0em 1em;
+.form-check {
+  margin: 0em 1em;
 }
 
-.search-parameters{
-    border: 2px white solid;
-    float: left;
-    height: 20em;
-    width: 14em;
-    margin: 0;
-    margin-top: 2em;
-    border-top-right-radius: 15%;
-    border-bottom-right-radius: 15%;
-    padding: 1em;
+.search-parameters {
+  border: 2px white solid;
+  float: left;
+  height: 20em;
+  width: 14em;
+  margin: 0;
+  margin-top: 2em;
+  border-top-right-radius: 15%;
+  border-bottom-right-radius: 15%;
+  padding: 1em;
 }
 
-.colors{
-    border: 2px white solid;
-    float: right;
-    height: 20em;
-    width: 14em;
-    margin: 0;
-    margin-top: 2em;
-    border-top-left-radius: 15%;
-    border-bottom-left-radius: 15%;
-    padding: 0.5em;
+.colors {
+  border: 2px white solid;
+  float: right;
+  height: 20em;
+  width: 14em;
+  margin: 0;
+  margin-top: 2em;
+  border-top-left-radius: 15%;
+  border-bottom-left-radius: 15%;
+  padding: 0.5em;
 }
 
-.color-brush{
-    font-size: 1.5em;
-}
-/* .color-item{
-    height: 5em;
-    width: 10em;
-    margin:0;
-    margin-left: 2em;
-    margin-top: 0.5em;
-    padding: 0.1em;
-} */
-
-.color-item-label{
-    font-size: 0.8em;
+.color-brush {
+  font-size: 1.5em;
 }
 
-#chosendiv{
-    border: 1px black solid;
-    border-radius: 10px 10px;
-    margin: 0;
-    width: 30em;
-    float: left;
-    margin-top: 1em;
-    margin-left: 2em;
-    height: 2em;
-    background: white;
+.color-item-label {
+  font-size: 0.8em;
 }
 
-#searchbtn{
-    float: left;
-    margin-left: 17em;
-    margin-top: 0.3em;
+#chosendiv {
+  border: 1px black solid;
+  border-radius: 10px 10px;
+  margin: 0;
+  width: 30em;
+  float: left;
+  margin-top: 1em;
+  margin-left: 2em;
+  height: 2em;
+  background: white;
 }
 
-.code{
-    border:1px solid;
-    width:500px;
-    height:200px;
-    overflow:auto;
-    outline:none;
-    resize:none;
+#searchbtn {
+  float: left;
+  margin-left: 17em;
+  margin-top: 0.3em;
 }
 
-.sorting-algos{
-    border: 1px white solid;
-    margin-top: 0.5em;
-    border-radius: 50px;
-    width: auto;
-    height: 2em;
+.code {
+  border: 1px solid;
+  width: 500px;
+  height: 200px;
+  overflow: auto;
+  outline: none;
+  resize: none;
 }
 
-#sortbtn{
-    float: left;
-    margin-left: 11em;
-    margin-top: 0.3em;
+.sorting-algos {
+  border: 1px white solid;
+  margin-top: 0.5em;
+  border-radius: 50px;
+  width: auto;
+  height: 2em;
 }
 
-#resetBtn{
-    margin: 0;
-    float: left;
-    margin-top: 0.3em;
-    margin-left: 2em;
+#sortbtn {
+  float: left;
+  margin-left: 11em;
+  margin-top: 0.3em;
 }
 
-.slider{
-    width: 95%;
-    height: 12px;
+#resetBtn {
+  margin: 0;
+  float: left;
+  margin-top: 0.3em;
+  margin-left: 2em;
 }
 
-#sortSpeedLabel{
-    margin-top: 30%;
+.slider {
+  width: 95%;
+  height: 12px;
+}
+
+#sortSpeedLabel {
+  margin-top: 30%;
+}
+
+.boxes {
+  display: grid;
+  width: 705px;
+  height: 410px;
+  grid-template-columns: repeat(25, 25px);
+  grid-template-rows: repeat(15, 25px);
+  gap: 1px;
+  border-top: 3px white solid;
+  border-bottom: 3px white solid;
+  margin-top: 0.3em;
+  padding: 0;
+  padding-left: 2em;
+  padding-top: 0.4em;
+  margin-left: 18em;
+}
+
+#tag {
+  margin-top: 0.2em;
+}
+
+#findbtn {
+  float: left;
+  margin-left: 18em;
+  margin-top: 0.3em;
+}
+
+#resetbtn {
+  float: left;
+  margin-left: 8em;
+  margin-top: 0.3em;
+}
+
+#patternbtn {
+  float: left;
+  margin-left: 8em;
+  margin-top: 0.3em;
+}
+
+.changeThemeBtn {
+  width: 180px;
+  height: 35px;
+  margin-bottom: 0.3em;
+}
+
+#changeThemeOnepiece {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/OnePiece.png");
+}
+
+#changeThemeMinecraft {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/MinecraftBtn.png");
+}
+
+#changeThemeThor {
+  background-size: 180px 35px;
+  background-position: center;
+  background-image: url("/static/images/ThorBtn.png");
+}
+
+.info-div {
+  display: flex;
+  float: left;
+  background-size: 25px 25px;
+  width: 30px;
+  height: 30px;
+  margin-left: 3em;
+  background-color: #17a2b8;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
+.pathfinding-algos {
+  border: 1px white solid;
+  margin-top: 0.2em;
+  border-radius: 50px;
+  width: 70em;
+  height: 3em;
 }
