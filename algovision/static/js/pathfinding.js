@@ -369,27 +369,25 @@ let Thor = {
   fontSize: "20px",
 };
 
-let Dragonball = {
-  Source: "Source-Dragonball2.png",
-  Goal: "Goal-Dragonball.png",
-  Wall: "Wall-Dragonball.png",
-  Path: "Path-DragonBall.gif",
+let Onepiece = {
+  Source: "Luffy.png",
+  Goal: "Sunny.png",
+  Wall: "World.png",
+  Path: "Path-Onepiece.gif",
   Tag:
-    "Watch as the Goku tries to find the path to Dragon balls being blocked by Red Ribbon Army.",
+    "Watch as Luffy tries to find the path to Thousand Sunny being blocked by World Government.",
   fontFamily: "'Electrolize', sans-serif",
   fontSize: "20px",
 };
 
 let Theme = Default;
 
-document
-  .querySelector("#changeThemeDragonball")
-  .addEventListener("click", () => {
-    Theme = Dragonball;
-    boxes.innerHTML = "";
-    drawBoard();
-    g = newGraph();
-  });
+document.querySelector("#changeThemeOnepiece").addEventListener("click", () => {
+  Theme = Onepiece;
+  boxes.innerHTML = "";
+  drawBoard();
+  g = newGraph();
+});
 document
   .querySelector("#changeThemeMinecraft")
   .addEventListener("click", () => {
@@ -1090,15 +1088,14 @@ findbtn.addEventListener("click", async function findPath() {
   }
   while (!path.isEmpty()) {
     let pathBoxNum = path.pop();
-    await sleep(25);
-
+    await sleep(1);
     let pathBox = document.querySelector(`.box${pathBoxNum}`);
 
     pathBox.style.backgroundSize = `1px 1px`;
     pathBox.style.backgroundRepeat = "no-repeat";
     pathBox.style.backgroundPosition = "center";
     pathBox.style.backgroundImage = "url('/static/images/" + Theme.Path + "')";
-    for (let i = 0; i <= 25; i += 2) {
+    for (let i = 0; i <= 25; i += 5) {
       pathBox.style.backgroundSize = `${i}px ${i}px`;
       await sleep(1);
     }

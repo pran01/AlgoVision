@@ -188,10 +188,10 @@ a {
   margin-bottom: 0.3em;
 }
 
-#changeThemeDragonball {
+#changeThemeOnepiece {
   background-size: 180px 35px;
   background-position: center;
-  background-image: url("/static/images/DragonBallBtn.png");
+  background-image: url("/static/images/OnePiece.png");
 }
 
 #changeThemeMinecraft {
