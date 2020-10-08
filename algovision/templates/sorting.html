@@ -2,129 +2,48 @@
 <title>Sorting</title>
 {% endblock %} {% block body %}
 <div class="full-height" style="background: #0c0032; color: white">
-  <nav
-    class="navbar navbar-light"
-    style="background: #17a2b8; height: 3.5em; color: white"
-  >
+  <nav class="navbar navbar-light" style="background: #17a2b8; height: 3.5em; color: white">
     <a class="navbar-brand" href="{{url_for('home')}}">
-      <img
-        src="{{url_for('static',filename='images/code.png')}}"
-        width="35"
-        height="35"
-        alt="Algovision"
-        loading="lazy"
-      />
+      <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision"
+        loading="lazy" />
       <span class="hide">Algo-Vision</span>
     </a>
   </nav>
   <div class="container sorting-algos text-center">
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo1"
-        value="Insertion"
-      />
-      <label class="form-check-label" for="inlineRadio1"
-        ><u
-          ><a data-toggle="modal" data-target="#InsertionModal"
-            ><b> Insertion</b></a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo1" value="Insertion" />
+      <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal" data-target="#InsertionModal"><b>
+              Insertion</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo2"
-        value="Selection"
-      />
-      <label class="form-check-label" for="inlineRadio2"
-        ><u
-          ><a data-toggle="modal" data-target="#SelectionModal"
-            ><b> Selection</b></a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo2" value="Selection" />
+      <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target="#SelectionModal"><b>
+              Selection</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo3"
-        value="Bubble"
-      />
-      <label class="form-check-label" for="inlineRadio3"
-        ><u
-          ><a data-toggle="modal" data-target="#BubbleModal"
-            ><b> Bubble</b></a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo3" value="Bubble" />
+      <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal" data-target="#BubbleModal"><b>
+              Bubble</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo4"
-        value="MergeIttr"
-      />
-      <label class="form-check-label" for="inlineRadio4"
-        ><u
-          ><a data-toggle="modal" data-target="#MergeIttrModal"
-            ><b> Merge(Iterative)</b></a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo4" value="MergeIttr" />
+      <label class="form-check-label" for="inlineRadio4"><u><a data-toggle="modal" data-target="#MergeIttrModal"><b>
+              Merge(Iterative)</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo5"
-        value="MergeRecur"
-      />
-      <label class="form-check-label" for="inlineRadio5"
-        ><u
-          ><a data-toggle="modal" data-target="#MergeRecurModal"
-            ><b> Merge(Recursive)</b></a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo5" value="MergeRecur" />
+      <label class="form-check-label" for="inlineRadio5"><u><a data-toggle="modal" data-target="#MergeRecurModal"><b>
+              Merge(Recursive)</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo6"
-        value="Quick"
-      />
-      <label class="form-check-label" for="inlineRadio6"
-        ><u
-          ><a data-toggle="modal" data-target="#QuickModal"><b> Quick</b></a></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo6" value="Quick" />
+      <label class="form-check-label" for="inlineRadio6"><u><a data-toggle="modal" data-target="#QuickModal"><b>
+              Quick</b></a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="SortAlgos"
-        id="sortAlgo7"
-        value="Heap"
-      />
-      <label class="form-check-label" for="inlineRadio7"
-        ><u
-          ><a data-toggle="modal" data-target="#HeapModal"><b> Heap</b></a></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="SortAlgos" id="sortAlgo7" value="Heap" />
+      <label class="form-check-label" for="inlineRadio7"><u><a data-toggle="modal" data-target="#HeapModal"><b>
+              Heap</b></a></u></label>
     </div>
   </div>
   <div class="container text-center search-parameters">
@@ -134,34 +53,22 @@
           <b>Sorting Speed</b><br />
           <span>(Kindly reset the array before setting the speed.)</span><br />
         </label>
-        <input
-          type="range"
-          min="10"
-          max="300"
-          value="200"
-          class="slider"
-          id="sortSpeed"
-        />
+        <input type="range" min="10" max="300" value="200" class="slider" id="sortSpeed" />
       </div>
     </form>
   </div>
   <div class="container colors text-center">
-    <h4>Colors</h4>
+    <h4>Key</h4>
     <br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #3500d3"></span
-    ><span class="color-item"
-      ><span class="color-item-label">Selected</span></span
-    ><br />
+    <span class="fas fa-paint-brush color-brush" style="color: #3500d3"></span><span class="color-item"><span
+        class="color-item-label">Selected</span></span><br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #f64c72"></span
-    ><span class="color-item"
-      ><span class="color-item-label">Checking</span></span
-    ><br />
+    <span class="fas fa-paint-brush color-brush" style="color: #f64c72"></span><span class="color-item"><span
+        class="color-item-label">Checking</span></span><br />
     <hr style="background: white" />
-    <span class="fas fa-paint-brush color-brush" style="color: #5cdb95"></span
-    ><span class="color-item"><span class="color-item-label">Sorted</span></span
-    ><br />
+    <span class="fas fa-paint-brush color-brush" style="color: #5cdb95"></span><span class="color-item"><span
+        class="color-item-label">Sorted</span></span><br />
     <hr style="background: white" />
   </div>
   <div class="container bars text-center"></div>
@@ -179,26 +86,15 @@
 </div>
 
 <!--InsertionModal-->
-<div
-  class="modal fade"
-  id="InsertionModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="InsertionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Insertion Sort
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -233,12 +129,8 @@ function insertionSort(arr){
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/insertion-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/insertion-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -246,26 +138,15 @@ function insertionSort(arr){
 </div>
 
 <!--SelectionModal-->
-<div
-  class="modal fade"
-  id="SelectionModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="SelectionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Selection Sort
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -298,12 +179,8 @@ function selectionSort(arr){
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/selection-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/selection-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -311,26 +188,15 @@ function selectionSort(arr){
 </div>
 
 <!--BubbleModal-->
-<div
-  class="modal fade"
-  id="BubbleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="BubbleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Bubble Sort
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -367,12 +233,8 @@ function bubbleSort(arr){
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/bubble-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/bubble-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -380,26 +242,15 @@ function bubbleSort(arr){
 </div>
 
 <!--MergeIttrModal-->
-<div
-  class="modal fade"
-  id="MergeIttrModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="MergeIttrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Merge Sort(Itterative)
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -455,12 +306,8 @@ function mergeIterative(arr,leftStart,mid,rightEnd){
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/iterative-merge-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/iterative-merge-sort/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -468,26 +315,15 @@ function mergeIterative(arr,leftStart,mid,rightEnd){
 </div>
 
 <!--MergeRecurModal-->
-<div
-  class="modal fade"
-  id="MergeRecurModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="MergeRecurModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Merge Sort(Recursive)
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -546,12 +382,8 @@ function mergeRecursive(left,right){
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/merge-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/merge-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -559,24 +391,13 @@ function mergeRecursive(left,right){
 </div>
 
 <!--QuickModal-->
-<div
-  class="modal fade"
-  id="QuickModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="QuickModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">Quick Sort</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -650,12 +471,8 @@ function partition(a,l,h){
 </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/quick-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/quick-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -663,24 +480,13 @@ function partition(a,l,h){
 </div>
 
 <!--HeapModal-->
-<div
-  class="modal fade"
-  id="HeapModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="HeapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">Heap Sort</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -754,12 +560,8 @@ function heapSort(a){
 </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/heap-sort/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank" href="https://www.geeksforgeeks.org/heap-sort/">More
+          Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>

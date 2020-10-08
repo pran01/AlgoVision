@@ -2,101 +2,38 @@
 <title>Searching</title>
 {% endblock %} {% block body %}
 <div class="full-height" style="background: #0c0032; color: white">
-  <nav
-    class="navbar navbar-light"
-    style="background: #17a2b8; height: 3.3em; color: white"
-  >
+  <nav class="navbar navbar-light" style="background: #17a2b8; height: 3.3em; color: white">
     <a class="navbar-brand" href="{{url_for('home')}}">
-      <img
-        src="{{url_for('static',filename='images/code.png')}}"
-        width="35"
-        height="35"
-        alt="Algovision"
-        loading="lazy"
-      />
+      <img src="{{url_for('static',filename='images/code.png')}}" width="35" height="35" alt="Algovision"
+        loading="lazy" />
       <span class="hide">Algo-Vision</span>
     </a>
   </nav>
   <div class="container pathfinding-algos text-center">
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="PathAlgos"
-        id="pathAlgo1"
-        value="Dijkstra"
-      />
-      <label class="form-check-label" for="inlineRadio1"
-        ><u
-          ><a data-toggle="modal" data-target="#DijkstraModal"
-            ><b>Dijkstra</b> (Shortest path)</a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="PathAlgos" id="pathAlgo1" value="Dijkstra" />
+      <label class="form-check-label" for="inlineRadio1"><u><a data-toggle="modal"
+            data-target="#DijkstraModal"><b>Dijkstra</b> (Shortest path)</a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="PathAlgos"
-        id="pathAlgo2"
-        value="A*"
-      />
-      <label class="form-check-label" for="inlineRadio2"
-        ><u
-          ><a data-toggle="modal" data-target="#AStarModal"
-            ><b>A*</b> (Shortest path)</a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="PathAlgos" id="pathAlgo2" value="A*" />
+      <label class="form-check-label" for="inlineRadio2"><u><a data-toggle="modal" data-target="#AStarModal"><b>A*</b>
+            (Shortest path)</a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="PathAlgos"
-        id="pathAlgo3"
-        value="bfs"
-      />
-      <label class="form-check-label" for="inlineRadio3"
-        ><u
-          ><a data-toggle="modal" data-target="#BFSModal"
-            ><b>Bredth-first search</b> (Shortest Path)</a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="PathAlgos" id="pathAlgo3" value="bfs" />
+      <label class="form-check-label" for="inlineRadio3"><u><a data-toggle="modal"
+            data-target="#BFSModal"><b>Bredth-first search</b> (Shortest Path)</a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="PathAlgos"
-        id="pathAlgo4"
-        value="dfs"
-      />
-      <label class="form-check-label" for="inlineRadio4"
-        ><u
-          ><a data-toggle="modal" data-target="#DFSModal"
-            ><b>Depth-first search</b> (shortest not guaranteed)</a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="PathAlgos" id="pathAlgo4" value="dfs" />
+      <label class="form-check-label" for="inlineRadio4"><u><a data-toggle="modal"
+            data-target="#DFSModal"><b>Depth-first search</b> (shortest not guaranteed)</a></u></label>
     </div>
     <div class="form-check form-check-inline">
-      <input
-        class="form-check-input"
-        type="radio"
-        name="PathAlgos"
-        id="pathAlgo5"
-        value="greedy"
-      />
-      <label class="form-check-label" for="inlineRadio5"
-        ><u
-          ><a data-toggle="modal" data-target="#BestFirstModal">
-            <b>Greedy Best-First</b> (shortest not guaranteed)</a
-          ></u
-        ></label
-      >
+      <input class="form-check-input" type="radio" name="PathAlgos" id="pathAlgo5" value="greedy" />
+      <label class="form-check-label" for="inlineRadio5"><u><a data-toggle="modal" data-target="#BestFirstModal">
+            <b>Greedy Best-First</b> (shortest not guaranteed)</a></u></label>
     </div>
   </div>
   <div class="container search-parameters">
@@ -105,48 +42,21 @@
         <label class="text-center w-100" id="pathSpeedLabel">
           <b>Speed</b><br />
         </label>
-        <input
-          type="range"
-          min="1"
-          max="500"
-          value="485"
-          class="slider"
-          id="pathSpeed"
-        />
+        <input type="range" min="1" max="500" value="485" class="slider" id="pathSpeed" />
       </div>
       <hr style="width: 100%; background: white" />
       <label class="text-center w-100" id="pathSpeedLabel">
         <b>Themes</b><br />
       </label>
-      <button
-        type="button"
-        class="btn btn-info changeThemeBtn"
-        id="changeThemeDefault"
-      >
-        Default</button
-      ><br />
-      <button
-        type="button"
-        class="btn btn-info changeThemeBtn"
-        id="changeThemeOnepiece"
-      ></button
-      ><br />
-      <button
-        type="button"
-        class="btn btn-info changeThemeBtn"
-        id="changeThemeThor"
-      ></button
-      ><br />
-      <button
-        type="button"
-        class="btn btn-info changeThemeBtn"
-        id="changeThemeMinecraft"
-      ></button
-      ><br />
+      <button type="button" class="btn btn-info changeThemeBtn" id="changeThemeDefault">
+        Default</button><br />
+      <button type="button" class="btn btn-info changeThemeBtn" id="changeThemeOnepiece"></button><br />
+      <button type="button" class="btn btn-info changeThemeBtn" id="changeThemeThor"></button><br />
+      <button type="button" class="btn btn-info changeThemeBtn" id="changeThemeMinecraft"></button><br />
     </form>
   </div>
   <div class="container colors text-center">
-    <h4><u>Info</u></h4>
+    <h4><u>Key</u></h4>
     <br />
     <div class="info-div" id="sourceDiv"></div>
     <span class="info-label">Source</span><br />
@@ -169,49 +79,30 @@
     <span class="fas fa-redo"></span> Reset Walls
   </button>
   <div class="btn-group dropup">
-    <button
-      type="button"
-      id="patternbtn"
-      class="btn btn-info dropdown-toggle"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
+    <button type="button" id="patternbtn" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Wall Patterns
     </button>
     <div class="dropdown-menu text-center">
       <a class="w-100" type="button" onclick="drawWallPreset(wallPreset1)">
-        Pattern 1</a
-      >
+        Pattern 1</a>
       <div class="dropdown-divider"></div>
       <a class="w-100" type="button" onclick="drawWallPreset(wallPreset2)">
-        Pattern 2</a
-      >
+        Pattern 2</a>
     </div>
   </div>
 </div>
 
 <!--DijkstraModal-->
-<div
-  class="modal fade"
-  id="DijkstraModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="DijkstraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Dijkstra's Algorithm
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -296,12 +187,8 @@
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -309,24 +196,13 @@
 </div>
 
 <!--AstarModal-->
-<div
-  class="modal fade"
-  id="AStarModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="AStarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">A* Search</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -430,12 +306,8 @@
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/a-search-algorithm/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/a-search-algorithm/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -443,26 +315,15 @@
 </div>
 
 <!--BFSModal-->
-<div
-  class="modal fade"
-  id="BFSModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="BFSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Bredth-first Search
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -503,12 +364,8 @@ bfs(start) {
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -516,26 +373,15 @@ bfs(start) {
 </div>
 
 <!--DFSModal-->
-<div
-  class="modal fade"
-  id="DFSModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="DFSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Depth First Search
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -577,12 +423,8 @@ dfsUtil(start, visited) {
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -590,26 +432,15 @@ dfsUtil(start, visited) {
 </div>
 
 <!--BestFirstModal-->
-<div
-  class="modal fade"
-  id="BestFirstModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalScrollableTitle"
-  aria-hidden="true"
->
+<div class="modal fade" id="BestFirstModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">
           Greedy Best First Search
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -687,12 +518,8 @@ greedyBestFirstSearch(start, goal) {
         </pre>
       </div>
       <div class="modal-footer">
-        <a
-          type="button"
-          class="btn btn-info"
-          href="https://www.geeksforgeeks.org/best-first-search-informed-search/"
-          >More Info</a
-        >
+        <a type="button" class="btn btn-info" target="_blank"
+          href="https://www.geeksforgeeks.org/best-first-search-informed-search/">More Info</a>
         <button class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
     </div>
