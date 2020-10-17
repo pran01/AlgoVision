@@ -1,3 +1,10 @@
+# This repo
+img/
+*.md
+Procfile
+LICENSE
+
+# Generic dockerignore for python projects \/
 # Git
 .git
 .gitignore
