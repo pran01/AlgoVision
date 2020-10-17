@@ -17,14 +17,14 @@ Interactive visual education tool for all your favorite computer science concept
   - [Merge Sort (Iterative)](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js#L294)
   - [Merge Sort (Recursive)](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js#L413)
   - [Heap Sort](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js#L634)
-  <img src="./img/sorting.png">
+  <img src="./img/sort.gif">
 - [Path-Finding](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js)
   - [Breadth First Search](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js#L791)
   - [Depth First Search](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js#L825)
   - [Dijkstras](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js#L867)
   - [A* Star](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js#L933)
   - [Greedy Best-First Search](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/pathfinding.js#L997)
-  <img src="./img/pathfinding.png">
+  <img src="./img/path.gif">
 
 ## TODO
 - [ ] Maze generation
