@@ -8,7 +8,7 @@ Interactive visual education tool for all your favorite computer science concept
   - [Sequential](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/searching.js#L96)
   - [Binary](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/searching.js#L126)
   - [Interpolation](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/searching.js#L171)
-  <img src="./img/search.png">
+  <img src="./img/search.gif">
 - [Sort](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js)
   - [Insertion Sort](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js#L113)
   - [Selection Sort](https://github.com/pran01/AlgoVision/blob/master/algovision/static/js/sorting.js#L163)
