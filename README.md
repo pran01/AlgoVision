@@ -1,6 +1,9 @@
 # AlgoVision
 Interactive visual education tool for all your favorite computer science concepts!
 
+Check out at <a href="http://algovision.herokuapp.com">Heroku</a>
+
+
 <img src="./img/main.png">
 
 ## Supported algorithms
